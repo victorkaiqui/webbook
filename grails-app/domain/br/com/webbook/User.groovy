@@ -9,14 +9,19 @@ class User {
     String email
     String username
     String password
+    static hasMany = [bookmark : Bookmark]
     boolean enabled
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
 
     static constraints = {
+        name blank: false  
+        lastName blank: false        
         username blank: false, unique: true
+        email blank: false 
         password blank: false
+ 
     }
 
     static mapping = {
