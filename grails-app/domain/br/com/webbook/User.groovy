@@ -3,25 +3,29 @@ package br.com.webbook
 class User {
 
     transient springSecurityService
-
+    
+    Date dateCreated
+    Date lastUpdated
+    
     String name
     String lastName
     String email
     String username
     String password
-    static hasMany = [bookmark : Bookmark]
-    boolean enabled
+    Date birthyday
+    static hasMany = [bookmarks : Bookmark , comments : Comment , filters : Filter]    
+    boolean enabled = true
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
 
     static constraints = {
-        name blank: false  
-        lastName blank: false        
-        username blank: false, unique: true
-        email blank: false 
-        password blank: false
- 
+        name blank: false , size: 5..15  
+        lastName blank: false , size: 5..15        
+        username blank: false, unique: true , size: 5..15
+        email blank: false ,email: true
+        password blank: false , size: 5..15  , password : true     
+        birthyday widget : 'datePicker'
     }
 
     static mapping = {
