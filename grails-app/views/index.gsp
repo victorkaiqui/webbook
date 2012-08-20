@@ -86,9 +86,11 @@ margin-top: 0;
   <div id="page-body" role="main">
     <div id="controller-list" role="navigation">
       <h2>Available Controllers:</h2>
+      <g:link controller="login" action="index"> login </g:link>
+
       <ul>
         <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-          <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
+          <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.name}</g:link></li>
         </g:each>
       </ul>
     </div>

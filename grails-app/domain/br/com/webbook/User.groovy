@@ -24,7 +24,7 @@ class User {
         lastName blank: false , size: 5..15        
         username blank: false, unique: true , size: 5..15
         email blank: false ,email: true
-        password blank: false , size: 5..15  , password : true     
+        password blank: false , password : true     
         birthyday widget : 'datePicker'
     }
 
