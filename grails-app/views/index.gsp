@@ -65,6 +65,11 @@ p {
   margin: 0.25em 0;
 }
 
+
+#status {
+  display: none;
+}
+
 @media screen and (max-width: 480px) {
   #status {
     display: none;
