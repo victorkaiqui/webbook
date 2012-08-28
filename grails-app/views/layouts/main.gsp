@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <title>Webbook</title>
-    <!--     <link href='http://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'> 
-         <link href='http://fonts.googleapis.com/css?family=Lato|Metrophobic' rel='stylesheet' type='text/css'> -->
+    <!--         <link href='http://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'> 
+             <link href='http://fonts.googleapis.com/css?family=Lato|Metrophobic' rel='stylesheet' type='text/css'> -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'text.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: '960.css')}" type="text/css">
@@ -25,8 +25,13 @@
         <input id="submit" type="submit" class="wb-left-float" value="Pesquisar">
       </form>
       <ul class="wb-right-float">
-        <li><a href="/webbook/login/auth" id="button-login" class="wb-border-radius-all">Entrar</a></li>
-        <li><a href="/webbook/user/create" id="button-sign" class="wb-border-radius-all">Cadastre-se</a></li>
+        <sec:ifNotLoggedIn>
+          <li><a href="/webbook/login/auth" id="button-login" class="wb-border-radius-all">Entrar</a></li>
+          <li><a href="/webbook/user/create" id="button-sign" class="wb-border-radius-all">Cadastre-se</a></li>
+        </sec:ifNotLoggedIn>
+         <sec:ifLoggedIn>
+          <sec:username id='wb-left-float' /> (<g:link controller="logout">sign out</g:link>)
+        </sec:ifLoggedIn>
       </ul>
     </nav>
   </header>
