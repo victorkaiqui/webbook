@@ -7,7 +7,7 @@
   <body>
 
     <div class="grid_8 prefix_2 suffix_2" >
-      <div class='fheader'><g:message code="springSecurity.login.header"/></div>
+      <div class='fheader'></div>
 
       <g:if test='${flash.message}'>
         <div class='login_message'>${flash.message}</div>
@@ -17,7 +17,7 @@
           <div class='login_message'>${flash.message}</div>
         </g:if>
         <h3 class="wb-font-x-big">Faça seu Login</h3>
-        <p class="wb-font-medium">Ainda não tem uma conta? <a href="">Cadastre-se</a></p>
+        <p class="wb-font-medium">Ainda não tem uma conta? <a href="/webbook/user/create">Cadastre-se</a></p>
         <form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
           <p>
             <label for='username'><g:message code="springSecurity.login.username.label"/>:</label>
