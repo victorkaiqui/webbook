@@ -26,8 +26,8 @@
       </form>
       <ul class="wb-right-float">
         <sec:ifNotLoggedIn>
-          <li><a href="/webbook/login/auth" id="button-login" class="wb-border-radius-all">Entrar</a></li>
-          <li><a href="/webbook/user/create" id="button-sign" class="wb-border-radius-all">Cadastre-se</a></li>
+          <li><a href="/webbook/login/auth" id="button-sign" class="wb-border-radius-all">Entrar</a></li>
+<!--          <li><a href="/webbook/user/create" id="button-sign" class="wb-border-radius-all">Cadastre-se</a></li>-->
         </sec:ifNotLoggedIn>
          <sec:ifLoggedIn>
           <sec:username id='wb-left-float' /> (<g:link controller="logout">sign out</g:link>)

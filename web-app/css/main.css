@@ -41,10 +41,10 @@ header nav ul li{
     margin-left:10px;
 }
 #content{
-    padding-top: 15px;
+    padding-top: 5px;
 }
 footer{
-    padding:20px 0;
+    padding:20px;
     clear:both;
     text-align:center;
     margin-top: 50px;
@@ -292,7 +292,7 @@ textarea{}
 }
 #login-form .field-input input{
     width: 280px;
-    height: 30px;
+    height: 20px;
 }
 
 #login-form .controls{
