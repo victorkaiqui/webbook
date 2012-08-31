@@ -3,7 +3,9 @@ package br.com.webbook
 import org.springframework.dao.DataIntegrityViolationException
 
 class UserController {
-
+    
+    def springSecurityService
+    
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -27,7 +29,10 @@ class UserController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-        redirect(action: "show", id: userInstance.id)
+       // redirect(action: "show", id: userInstance.id )
+        redirect(uri: "/" , id: userInstance.id)
+        springSecurityService.reauthenticate(userInstance.getUsername(),userInstance.getPassword())
+
     }
 
     def show(Long id) {
@@ -63,7 +68,7 @@ class UserController {
         if (version != null) {
             if (userInstance.version > version) {
                 userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'user.label', default: 'User')] as Object[],
+                    [message(code: 'user.label', default: 'User')] as Object[],
                           "Another user has updated this User while you were editing")
                 render(view: "edit", model: [userInstance: userInstance])
                 return
