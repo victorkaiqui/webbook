@@ -99,3 +99,8 @@ grails.plugins.springsecurity.authority.className = 'br.com.webbok.Authority'
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'br.com.webbook.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'br.com.webbook.UserAuthority'
 grails.plugins.springsecurity.authority.className = 'br.com.webbook.Authority'
+
+
+grails.plugins.springsecurity.facebook.domain.classname='FacebookUser'
+grails.plugins.springsecurity.facebook.appId='414095755305425'
+grails.plugins.springsecurity.facebook.secret='8e08462691ade01aa5f9deab5bdf08ac'

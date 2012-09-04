@@ -4,9 +4,13 @@
     <meta name="layout" content="main"/>
     <title>Welcome to WebBook</title>
   </style>
+<facebookAuth:init />
 </head>
 <body>
-<sec:loggedInUserInfo field="username"/>
+
+<facebookAuth:connect permissions="email,user_about_me"/>
+
+
 <sec:ifLoggedIn>
   <div id="page-body" role="main">
     <div id="controller-list" role="navigation" >
@@ -39,6 +43,7 @@
   <div class="grid_8" >
     <div class="wb-box-with-shadow popular-content" id="login-form-container">
       <h1 class="wb-font-big">Descubra, Colecione e Compartilhe novos conteúdos da Web</h1>
+
       <form action="user/save" id="login-form" method="POST">
         <div class="field-block">
           <div class="field-title">
@@ -122,6 +127,7 @@
           <span class="wb-font-medium"></span>
         </div>
       </form>
+
     </div>
   </div>
   <div class="clear"></div>

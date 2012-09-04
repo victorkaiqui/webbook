@@ -12,19 +12,22 @@ class User {
     String email
     String username
     String password
+    String facebookId
     Date birthyday
     static hasMany = [bookmarks : Bookmark , comments : Comment , filters : Filter]    
     boolean enabled = true
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
+    
+    
 
     static constraints = {
         name blank: false , size: 5..15  
         lastName blank: false , size: 5..15        
         username blank: false, unique: true , size: 5..15
         email blank: false ,email: true
-        password blank: false , password : true     
+        password blank: false , password : true      
         birthyday widget : 'datePicker'
     }
 

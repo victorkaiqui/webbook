@@ -11,6 +11,8 @@ import org.springframework.security.authentication.LockedException
 import org.springframework.security.core.context.SecurityContextHolder as SCH
 import org.springframework.security.web.WebAttributes
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import br.com.webbook.User
+import br.com.webbook.UserAuthority
 
 class LoginController {
 
@@ -132,5 +134,28 @@ class LoginController {
      */
     def ajaxDenied = {
         render([error: 'access denied'] as JSON)
+    }
+    
+    def facebookGraphService
+ 
+    def facebookLogin = {
+        def details = facebookGraphService.getDetails()
+        def facebookId = details.id
+ 
+        def user = User.findByFacebookId(facebookId)?: new User(
+            username: details.email,
+            password: springSecurityService.encodePassword(facebookId),
+            enabled: true,
+            facebookId: facebookId).save(failOnError: true)
+ 
+        def role = UserAuthority.findByAuthority('ROLE_FACEBOOK')?: new UserAuthority(
+            authority:'ROLE_FACEBOOK').save(failOnError: true)
+        if (! user.authorities.contains(role)) {
+            UserUserAuthority.create user, role
+        }
+ 
+        springSecurityService.reauthenticate(user.getUsername(),user.getPassword())
+        redirect(uri: "/" , id: userInstance.id)
+        
     }
 }
