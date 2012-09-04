@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Webbook</title>
+    <title> <g:message code="my.text.welcomeTitle"/></title>
     <!--         <link href='http://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'> 
              <link href='http://fonts.googleapis.com/css?family=Lato|Metrophobic' rel='stylesheet' type='text/css'> -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
@@ -12,11 +12,14 @@
 
   <g:layoutHead/>
   <r:layoutResources />
+  <facebookAuth:init />
 
 </head>
 
 <body>
+
   <!-- Cabeçalho -->
+
   <header style=" padding: 10px">
     <nav class="container_16">
       <a class="logo wb-left-float" href="/webbook">Webbook</a>
@@ -25,16 +28,21 @@
         <input id="submit" type="submit" class="wb-left-float" value="Pesquisar">
       </form>
       <ul class="wb-right-float">
-        <sec:ifNotLoggedIn>
-          <li><a href="/webbook/login/auth" id="button-sign" class="wb-border-radius-all">Entrar</a></li>
-          <!--          <li><a href="/webbook/user/create" id="button-sign" class="wb-border-radius-all">Cadastre-se</a></li>-->
-        </sec:ifNotLoggedIn>
         <sec:ifLoggedIn>
-          <sec:username id='wb-left-float' /> <a id="button-sign" class="wb-border-radius-all">(<g:link controller="logout" >sign out</g:link>)</a>
+          <sec:username id='wb-left-float' />(<g:link controller="logout" >sign out</g:link>)
         </sec:ifLoggedIn>
+
+        <sec:ifNotLoggedIn>
+
+          <li><a href="/webbook/login/auth" id="button-sign" class="wb-border-radius-all">Entrar</a></li>
+          <li ><facebookAuth:connect permissions="email,user_about_me"/></li>
+
+        </sec:ifNotLoggedIn>
+
       </ul>
     </nav>
   </header>
+
   <!-- Conteúdo-->
   <section id="content" class="container_12">
 
