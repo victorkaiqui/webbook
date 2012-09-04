@@ -3,16 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <title> <g:message code="my.text.welcomeTitle"/></title>
-    <!--         <link href='http://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'> 
-             <link href='http://fonts.googleapis.com/css?family=Lato|Metrophobic' rel='stylesheet' type='text/css'> -->
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css')}" type="text/css">
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'text.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: '960.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'reset.css')}" type="text/css">
 
+
   <g:layoutHead/>
   <r:layoutResources />
-  <facebookAuth:init />
+<!--  <facebookAuth:init />-->
 
 </head>
 
@@ -29,13 +30,13 @@
       </form>
       <ul class="wb-right-float">
         <sec:ifLoggedIn>
-          <sec:username id='wb-left-float' />(<g:link controller="logout" >sign out</g:link>)
+          <a href="/webbook/user/edit/"><sec:username id='wb-left-float' /></a>(<g:link controller="logout" >sign out</g:link>)
         </sec:ifLoggedIn>
 
         <sec:ifNotLoggedIn>
 
           <li><a href="/webbook/login/auth" id="button-sign" class="wb-border-radius-all">Entrar</a></li>
-          <li ><facebookAuth:connect permissions="email,user_about_me"/></li>
+<!--          <li ><facebookAuth:connect permissions="email,user_auserbout_me"/></li>-->
 
         </sec:ifNotLoggedIn>
 

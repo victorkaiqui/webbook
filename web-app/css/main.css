@@ -69,7 +69,7 @@ footer li a {
     color: #E5E5E5;
     display: block;
     float: left;
-    font-family: 'Metrophobic', sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: bold;
     font-size: 24px;
     height: 40px;
@@ -252,7 +252,7 @@ footer li a {
 
 .popular-content{
     color:#515151;
-    font-family: 'Metrophobic', sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size:20px;
     margin: 10px 0px;
     padding:10px;	

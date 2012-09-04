@@ -14,7 +14,7 @@ class User {
     String password
    
     Date birthyday
-    static hasMany = [bookmarks : Bookmark , comments : Comment , filters : Filter]    
+    static hasMany = [bookmarks : Bookmark , comments : Comment , filters : Filter, followers : User , followed : User ]    
     boolean enabled = true
     boolean accountExpired
     boolean accountLocked
