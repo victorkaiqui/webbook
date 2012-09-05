@@ -6,14 +6,11 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'text.css')}" type="text/css">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: '960.css')}" type="text/css">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'reset.css')}" type="text/css">
 
-
-  <g:layoutHead/>
+  <g:layoutHead />
   <r:layoutResources />
-<!--  <facebookAuth:init />-->
+  <facebookAuth:init />
+
 
 </head>
 
@@ -21,38 +18,33 @@
 
   <!-- Cabeçalho -->
 
-  <header style=" padding: 10px">
-    <nav class="container_16">
-      <a class="logo wb-left-float" href="/webbook">Webbook</a>
-      <form id="searchbox" class="wb-left-float" action="">
-        <input id="search" class="wb-left-float" type="text">
-        <input id="submit" type="submit" class="wb-left-float" value="Pesquisar">
-      </form>
-      <ul class="wb-right-float">
-        <sec:ifLoggedIn>
-          <a href="/webbook/user/edit/"><sec:username id='wb-left-float' /></a>(<g:link controller="logout" >sign out</g:link>)
-        </sec:ifLoggedIn>
+  <header>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href="#">WebBook</a>
+        <form class="navbar-search pull-center">
+          <input type="text" class="search-query" placeholder="Search">
+        </form>
+        <ul class="nav  pull-right">
+          <li class="active"><a href="kkkkkkk">Entrar</a></li>
+          <li ><facebookAuth:connect permissions="email,user_auserbout_me"/></li>
+          <li><a href="#">Link</a></li>
+        </ul>
 
-        <sec:ifNotLoggedIn>
-
-          <li><a href="/webbook/login/auth" id="button-sign" class="wb-border-radius-all">Entrar</a></li>
-<!--          <li ><facebookAuth:connect permissions="email,user_auserbout_me"/></li>-->
-
-        </sec:ifNotLoggedIn>
-
-      </ul>
-    </nav>
+      </div>
+    </div>
   </header>
 
   <!-- Conteúdo-->
-  <section id="content" class="container_12">
+  <div class="container">
 
-    <g:layoutBody/>
+    <g:layoutBody />
 
-  </section>
+  </div>
+
   <!--Rodapé-->
   <footer>
-    <ul>
+    <ul class="nav nav-pills">
       <li><a href="/webbook/error">Sobre</a></li>
 
       <li><a href="#">Ferramentas</a></li>
