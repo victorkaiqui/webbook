@@ -9,9 +9,6 @@
 
   <g:layoutHead />
   <r:layoutResources />
-  <facebookAuth:init />
-
-
 </head>
 
 <body>
@@ -22,13 +19,14 @@
     <div class="navbar">
       <div class="navbar-inner">
         <a class="brand" href="${request.contextPath}"><g:message code="my.text.title"/></a>
-        <form class="navbar-search pull-center">
-          <input type="text" class="search-query" placeholder="Search">
-        </form>
-        <ul class="nav  pull-right">
-          <li class="active"><a href="${createLink(controller: 'login' , action: 'auth')}">Entrar</a></li>
-          <li ><facebookAuth:connect permissions="email,user_auserbout_me"/></li>         
-        </ul>
+
+        <sec:ifLoggedIn>
+
+          <form class="navbar-search pull-center">
+            <input type="text" class="search-query" placeholder="Search">
+          </form>
+
+        </sec:ifLoggedIn>
 
       </div>
     </div>
@@ -48,7 +46,7 @@
 
       <li><a href="#"><g:message code="my.text.footer.ferramentas"/></a></li>
 
-      <li><a href="#" target="_blank"><g:message code="my.text.footer.blog"/></a></li>
+      <li><a href="#"><g:message code="my.text.footer.blog"/></a></li>
 
       <li><a href="#"><g:message code="my.text.footer.ajuda"/></a></li>
 
