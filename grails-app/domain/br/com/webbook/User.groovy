@@ -11,11 +11,12 @@ class User {
     String lastName
     String email
     String username
-    String password
-   
+    String password   
     Date birthyday
+    
     static mappedBy = [followers : 'followed' , followings : 'follower']
     static hasMany = [bookmarks : Bookmark , comments : Comment , filters : Filter, followers : Friendship , followings : Friendship ]    
+    
     boolean enabled = true
     boolean accountExpired
     boolean accountLocked

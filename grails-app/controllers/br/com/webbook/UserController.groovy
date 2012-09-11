@@ -11,7 +11,8 @@ class UserController {
     def index() {
         redirect(action: "list", params: params)
     }
-
+    
+   
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [userInstanceList: User.list(params), userInstanceTotal: User.count()]
@@ -34,7 +35,7 @@ class UserController {
         springSecurityService.reauthenticate(userInstance.getUsername(),userInstance.getPassword())
 
     }
-
+ 
     def show(Long id) {
         def userInstance = User.get(id)
         if (!userInstance) {

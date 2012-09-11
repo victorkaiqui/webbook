@@ -49,10 +49,8 @@
         <g:form url="[action:'auth', controller:'login']">
           <fieldset>
             <g:render template="/indexLoginForm"/>
-          </fieldset>
-          <fieldset>  
             <g:submitButton name="login" value="${message(code: 'default.button.login.label', default: 'Login')}" class="btn btn-warning btn-large"/>
-            <facebookAuth:connect permissions="email,user_about_me"/>
+<!--            <facebookAuth:connect permissions="email,user_about_me"/>-->
           </fieldset>
         </g:form>
 
@@ -61,7 +59,7 @@
 
         <g:form url="[action:'save', controller:'user']">
           <fieldset>
-            <g:render template="/indexCreateForm"/>
+            <g:render template="/indexCreateForm" />
             <g:submitButton name="create" value="${message(code: 'default.button.create.label', default: 'Create')}" class="btn btn-warning btn-large"/>
           </fieldset>
         </g:form>
