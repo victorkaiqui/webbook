@@ -42,7 +42,7 @@
     </div>
 
     <div class="span8" >
-      <h1><g:message code="my.text.index.label"/></h1>
+      <h3><g:message code="my.text.index.label"/></h3>
 
       <section>          
 

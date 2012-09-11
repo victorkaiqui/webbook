@@ -3,13 +3,17 @@
 <html>
   <head>
     <meta name="layout" content="main">  
-    <title><g:message code="default.create.label" args="[entityName]" /></title>
+    <title><g:message code="user.create.label" /></title>
   </head>
   <body>
+
   <g:hasErrors bean="${userInstance}">
     <ul class="errors" role="alert">
       <g:eachError bean="${userInstance}" var="error">
-        <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><p class="text-warning"><g:message error="${error}"/></p></li>
+        <li class="text-warning">
+<!--        <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>-->
+        <g:message error="${error}"/>
+        </li>
       </g:eachError>
     </ul>
   </g:hasErrors>
@@ -19,7 +23,7 @@
       <div class="row">
         <div class="span4 offset2">
 
-          <h1><g:message code="default.create.label" /></h1>
+          <h3><g:message code="user.create.label" /></h3>
 
           <g:form action="save" >
             <fieldset>
