@@ -1,16 +1,16 @@
-<!--
-  To change this template, choose Tools | Templates
-  and open the template in the editor.
--->
 
-<%@ page contentType="text/html;charset=UTF-8" %>
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Sample title</title>
-  </head>
-  <body>
-    <h1>Sample line</h1>
-  </body>
-</html>
+<div>
+  <g:textField name="username" maxlength="15" required="" value="${userInstance?.username}" class="input-big" placeholder="${message(code: 'user.username.label', default: 'username')}"/>
+</div>
+
+<div>
+  <g:field type="password" name="password" required="" value="${userInstance?.password}" class="input-big" placeholder="${message(code: 'user.password.label', default: 'password')}"/>
+</div>
+
+<div>
+  <g:field  type='checkbox'  name='checkbox' class="input-big"/> 
+  <small><g:message code="springSecurity.login.remember.me.label"/> - </small>
+  <small><a href="">Esqueceu a Senha?</a></small>
+</div>
+
