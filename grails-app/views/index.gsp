@@ -7,16 +7,27 @@
 <body>
 
 <sec:ifLoggedIn>
+  <div class="row-fluid">
 
-  <div id="page-body" role="main">
-    <div id="controller-list" role="navigation" >
+    <div class="span4" style="border: 1px solid gainsboro" >
+      <div class="bs-docs-example form-horizontal">
+      <strong><sec:loggedInUserInfo field="username"/> </strong>
+      <li class="divider"></li>
+      </div>
+    </div>
+
+
+
+    <div class="span8" style="border: 1px solid gainsboro">
+
       <ul>
         <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
           <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.name}</g:link></li>
         </g:each>
       </ul>
-    </div>
-  </div>
+
+    </div>  
+  </div>  
 
 </sec:ifLoggedIn>
 
@@ -50,7 +61,7 @@
           <fieldset>
             <g:render template="/indexLoginForm"/>
             <g:submitButton name="login" value="${message(code: 'default.button.login.label', default: 'Login')}" class="btn btn-warning btn-large"/>
-<!--            <facebookAuth:connect permissions="email,user_about_me"/>-->
+            <facebookAuth:connect permissions="email,user_about_me"/>
           </fieldset>
         </g:form>
 
