@@ -25,7 +25,7 @@
 
           <h3><g:message code="user.create.label" /></h3>
 
-          <g:form action="save" >
+          <g:form action="save">
             <fieldset>
               <g:render template="form"/>
             </fieldset>

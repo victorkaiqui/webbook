@@ -105,8 +105,6 @@ grails.plugins.springsecurity.facebook.domain.classname='FacebookUser'
 grails.plugins.springsecurity.facebook.appId='414095755305425'
 grails.plugins.springsecurity.facebook.secret='8e08462691ade01aa5f9deab5bdf08ac'
 
-
-
 grails.plugins.springsecurity.interceptUrlMap = [
     '/user/*':              ['IS_AUTHENTICATED_REMEMBERED'],
     '/bookmark/*':          ['IS_AUTHENTICATED_REMEMBERED']    

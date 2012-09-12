@@ -7,40 +7,28 @@
 
   <body>
 
-  <g:message code="springSecurity.login.header"/>
+    <div class="row">
+      <div class="span8 offset2" style="border: 1px solid gainsboro">
+        <div class="row">
+          <div class="span4 offset2">
 
-  <g:if test='${flash.message}'>
-    <div class='login_message'>${flash.message}</div>
-  </g:if>
+            <h3><g:message code="springSecurity.login.header"/></h3>
 
-  <form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
+            <g:if test='${flash.message}' class="text-warning">
+              <div>${flash.message}</div>
+            </g:if>
 
-    <div>
-      <g:textField  name='j_username' maxlength="15" required="" value="${userInstance?.username}" class="input-big" placeholder="${message(code: 'user.username.label', default: 'username')}"/>
+            <g:form url="[controller:'j_spring_security_check', action:'']" >
+              <fieldset>
+                <g:render template="/login/form"/>
+                <g:submitButton name="login" value="${message(code: 'default.button.login.label', default: 'Login')}" class="btn btn-warning btn-large"/>      
+              </fieldset>
+            </g:form>
+
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div>
-      <g:field type="password" name='j_password'" required="" value="${userInstance?.password}" class="input-big" placeholder="${message(code: 'user.password.label', default: 'password')}"/>
-    </div>
-
-    <div>
-      <g:field type='checkbox'  name='${rememberMeParameter}'  /><g:if test='${hasCookie}'>checked='checked'</g:if>
-      <small><g:message code="springSecurity.login.remember.me.label"/> - </small>
-      <small><a href="">Esqueceu a Senha?</a></small>
-    </div>
-
-
-    <div>
-      <g:submitButton  name="login" value='${message(code: "springSecurity.login.button")}' class="btn btn-warning btn-large"/>
-    </div>
-  </form>
-
-  <script type='text/javascript'>
-          <!--
-          (function() {
-                  document.forms['loginForm'].elements['j_username'].focus();
-          })();
-          // -->
-  </script>
-</body>
+  </body>
 </html>
