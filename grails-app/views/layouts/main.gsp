@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title> <g:message code="my.text.welcomeTitle"/></title>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css')}" type="text/css">
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css')}" type="text/css">  
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 
@@ -54,21 +54,21 @@
   <!--Rodapé-->
   <footer>
     <ul class="nav nav-pills">
-      <li><a href="#"><g:message code="my.text.footer.sobre"/></a></li>
+      <li><a href="footer/sobre"><g:message code="my.text.footer.sobre"/></a></li>
 
-      <li><a href="#"><g:message code="my.text.footer.ferramentas"/></a></li>
+      <li><a href="footer/ferramentas"><g:message code="my.text.footer.ferramentas"/></a></li>
 
-      <li><a href="#"><g:message code="my.text.footer.blog"/></a></li>
+      <li><a href="footer/blog"><g:message code="my.text.footer.blog"/></a></li>
 
-      <li><a href="#"><g:message code="my.text.footer.ajuda"/></a></li>
+      <li><a href="footer/ajuda"><g:message code="my.text.footer.ajuda"/></a></li>
 
-      <li><a href="#"><g:message code="my.text.footer.desenvolvedores"/></a></li>
+      <li><a href="footer/desenvolvedores"><g:message code="my.text.footer.desenvolvedores"/></a></li>
 
-      <li><a href="#"><g:message code="my.text.footer.feeds"/></a></li>
+      <li><a href="footer/feeds"><g:message code="my.text.footer.feeds"/></a></li>
 
-      <li><a href="#"><g:message code="my.text.footer.termosDeUso"/></a></li>
+      <li><a href="footer/termosdeuso"><g:message code="my.text.footer.termosDeUso"/></a></li>
 
-      <li><a href="#"><g:message code="my.text.footer.politicaDePrivacidade"/></a></li>
+      <li><a href="footer/politicadeprivacidade"><g:message code="my.text.footer.politicaDePrivacidade"/></a></li>
 
     </ul>
   </footer>

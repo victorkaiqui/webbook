@@ -54,7 +54,7 @@
 
     <div class="span8" >
       <h3><g:message code="my.text.index.label"/></h3>
-
+<img src="img/webook.jpg" >
       <section>          
 
         <g:form url="[action:'auth', controller:'login']">
@@ -66,6 +66,7 @@
         </g:form>
 
       </section>
+      
       <section>          
 
         <g:form url="[action:'save', controller:'user']">
@@ -76,9 +77,12 @@
         </g:form>
 
       </section>
+      
     </div>
-
+    
   </div>
+  
+  
 
 </sec:ifNotLoggedIn>
 

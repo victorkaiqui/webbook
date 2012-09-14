@@ -67,9 +67,10 @@ sub {
 }
 
 img {
+  float: right;
   height: auto;
-  max-width: 100%;
-  vertical-align: middle;
+  max-width: 50%;
+  vertical-align: right;
   border: 0;
   -ms-interpolation-mode: bicubic;
 }
