@@ -45,7 +45,7 @@
       </section>
       <section >
         <h3><g:message code="my.text.index.encontre"/></h3>
-        <p><g:message code="my.text.index.organize.conteudo"/></p>
+        <p><g:message code="my.text.index.encontre.conteudo"/></p>
       </section>
       <section >
         <h3><g:message code="my.text.index.compartilhe"/></h3>
