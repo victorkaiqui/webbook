@@ -28,6 +28,8 @@
           <g:form action="save" >
             <fieldset>
               <g:render template="form"/>
+
+              <span><g:message code="my.text.index.termo" args="${ ['<a href="#">', '</a>'] }" /></span>
             </fieldset>
             <fieldset>
               <g:submitButton name="create" value="${message(code: 'default.button.create.label', default: 'Create')}" class="btn btn-warning btn-large" />

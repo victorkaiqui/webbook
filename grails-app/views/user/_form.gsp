@@ -24,5 +24,4 @@
   <g:datePicker name="birthyday" widget="datePicker" precision="day"  value="${userInstance?.birthyday}" class="input-big" placeholder="${message(code: 'user.birthyday.label', default: 'birthyday')}"/>
 </div>
 
-<span><g:message code="my.text.index.termo" args="${ ['<a href="#">', '</a>'] }" /></span>
 

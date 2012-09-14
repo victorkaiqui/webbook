@@ -7,25 +7,51 @@
 <body>
 
 <sec:ifLoggedIn>
-  <div class="row-fluid">
 
-    <div class="span4" style="border: 1px solid gainsboro" >
-      <div class="bs-docs-example form-horizontal">
-        <strong><sec:loggedInUserInfo field="username"/> </strong>
-        <li class="divider"></li>
+  <div class="container-fluid">  
+    <div class="row-fluid"> 
+
+      <div class="span12" >
+        <br>
+        <h2><strong><sec:loggedInUserInfo field="username" /> </strong></h2>
+        <hr>
+
+        <br>
       </div>
-    </div>
 
-    <div class="span8" style="border: 1px solid gainsboro">
+      <div class="row-fluid"> 
+        <div class="span3">  
+          <div class="well sidebar-nav">  
+            <ul class="nav nav-list">  
+              <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
+                <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.name}</g:link></li>
+              </g:each> 
+            </ul>  
+          </div><!--/.well -->  
+        </div><!--/span-->  
 
-      <ul>
-        <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-          <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.name}</g:link></li>
-        </g:each>
-      </ul>
+        <div class="span9">  
+          <div class="leaderboard">  
+            <h5>Learn. Practice. Develop.</h5> 
+            <p>w3resource offers web development tutorials. We believe in Open Source. Love standards. And prioritize simplicity                           and readability while serving content.</p>  
+            <p><a class="btn btn-success btn-small">View</a></p>  
+          </div>  
+          <div class="leaderboard">  
+            <h5>Learn. Practice. Develop.</h5> 
+            <p>w3resource offers web development tutorials. We believe in Open Source. Love standards. And prioritize simplicity                           and readability while serving content.</p>  
+            <p><a class="btn btn-success btn-small">View</a></p>  
+          </div>  
+          <div class="leaderboard">  
+            <h5>Learn. Practice. Develop.</h5>  
+            <p>w3resource offers web development tutorials. We believe in Open Source. Love standards. And prioritize simplicity                           and readability while serving content.</p>  
+            <p><a class="btn btn-success btn-small">View</a></p>  
+          </div>  
+        </div>
+      </div>  
+      <hr>        
 
-    </div>  
-  </div>  
+    </div> 
+
 
 </sec:ifLoggedIn>
 
@@ -51,29 +77,39 @@
     </div>
 
     <div class="span8" >
-      <h3><g:message code="my.text.index.label"/></h3>
-      <img src="img/webook.jpg" >
-      <section>          
 
-        <g:form url="[controller:'j_spring_security_check', action:'']">
-          <fieldset>
-            <g:render template="/login/form"/>
-            <g:submitButton name="login" value="${message(code: 'default.button.login.label', default: 'Login')}" class="btn btn-warning btn-large"/>
-            <facebookAuth:connect permissions="email,user_about_me"/>
-          </fieldset>
-        </g:form>
 
-      </section>
+      <section>
 
-      <section>          
 
-        <g:form url="[action:'save', controller:'user']">
-          <fieldset>
-            <g:render template="/indexCreateForm" />
-            <g:submitButton name="create" value="${message(code: 'default.button.create.label', default: 'Create')}" class="btn btn-warning btn-large"/>
-          </fieldset>
-        </g:form>
+        <ul class="nav nav-tabs" id="tabs-menu">
+          <li class="active"><a href="#login">Login</a></li>
+          <li><a href="#cadastrar">Cadastrar</a></li>
+        </ul>
 
+        <div class="tab-content">
+          <div class="tab-pane active" id="login">
+            <h3><g:message code="my.text.index.label"/></h3>
+            <img src="img/webook.jpg" >
+            <g:form url="[controller:'j_spring_security_check', action:'']">
+              <fieldset>
+                <g:render template="/login/form"/>
+                <g:submitButton name="login" value="${message(code: 'default.button.login.label', default: 'Login')}" class="btn btn btn-info btn-large"/>
+                <facebookAuth:connect permissions="email,user_about_me"/>
+              </fieldset>
+            </g:form>
+          </div>
+
+          <div class="tab-pane" id="cadastrar">
+            <h3><g:message code="my.text.index.cadastro"/></h3>
+            <img src="img/webook.jpg" >
+            <g:form url="[action:'save', controller:'user']">
+              <fieldset>
+                <g:render template="/indexCreateForm" />
+                <g:submitButton name="create" value="${message(code: 'default.button.create.label', default: 'Create')}" class="btn btn-warning btn-large"/>
+              </fieldset>
+            </g:form>
+          </div>
       </section>
 
     </div>
@@ -83,6 +119,13 @@
 
 
 </sec:ifNotLoggedIn>
-
+<script>
+  $(function () {
+    $('#tabs-menu a').click(function (e) {
+e.preventDefault();
+$(this).tab('show');
+})
+})
+</script>
 </body>
 </html>

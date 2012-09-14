@@ -36,7 +36,7 @@
               <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
               <li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
               <li class="divider"></li>
-              <li><a href="#"><i class="i"></i> Make admin</a></li>
+              <li><i class="i"></i><g:link controller="logout" >sign out</g:link></li>
             </ul>
           </div>
 
@@ -55,7 +55,7 @@
 
   <!--Rodapé-->
   <footer>
-    <ul class="nav nav-pills">
+    <ul class="nav nav-pills"><br><br>
       <li><a href="footer/sobre"><g:message code="my.text.footer.sobre"/></a></li>
 
       <li><a href="footer/ferramentas"><g:message code="my.text.footer.ferramentas"/></a></li>
