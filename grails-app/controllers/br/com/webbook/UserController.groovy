@@ -14,8 +14,9 @@ class UserController {
     
    
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [userInstanceList: User.list(params), userInstanceTotal: User.count()]
+        //        params.max = Math.min(max ?: 10, 100)
+        def user = springSecurityService.currentUser
+        [userInstance: user]
     }
 
     def create() {
@@ -57,7 +58,23 @@ class UserController {
 
         [userInstance: userInstance]
     }
+    
+    def editProfile() {
+        def userInstance = springSecurityService.currentUser
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "list")
+            return
+        }
 
+        render(view: "edit", model: [userInstance: userInstance])
+    }
+
+    def config() {
+        def userInstance = springSecurityService.currentUser
+        
+        render(view: "config", model: [userInstance: userInstance])
+    }
     def update(Long id, Long version) {
         def userInstance = User.get(id)
         if (!userInstance) {
@@ -87,9 +104,13 @@ class UserController {
         redirect(action: "show", id: userInstance.id)
     }
 
-    def delete(Long id) {
-        def userInstance = User.get(id)
+    def delete() {
+        def userInstance = springSecurityService.currentUser
+        userInstance = User.get(userInstance.id)
         if (!userInstance) {
+            
+            
+            
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
             redirect(action: "list")
             return

@@ -18,7 +18,7 @@
   <!-- Cabeçalho -->
 
   <header>
-    <div class="navbar">
+    <div class="navbar navbar-inverse">
       <div class="navbar-inner">
         <a class="brand" href="${request.contextPath}"><g:message code="my.text.title"/></a>
 
@@ -32,11 +32,15 @@
             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user icon-white"></i><span class="caret"></span></a>
 
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown">
-              <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
-              <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
-              <li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
+
+              <li><g:link controller="user" action="config"><i class="icon-pencil"></i> Edit </g:link></li>
+
+              <li><g:link controller="user" action="delete"><i class="icon-trash"></i>Delete</g:link></li>
+
               <li class="divider"></li>
+
               <li><i class="i"></i><g:link controller="logout" >sign out</g:link></li>
+
             </ul>
           </div>
 

@@ -1,0 +1,77 @@
+
+<%@ page import="br.com.webbook.User" %>
+<!doctype html>
+<html>
+  <head>
+    <meta name="layout" content="main">
+  <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
+  <title><g:message code="default.list.label" args="[entityName]" /></title>
+</head>
+<body>
+
+  <div class="row-fluid">
+
+    <div class="span12">
+      <sec:loggedInUserInfo field="username" />
+      <div class="row-fluid">
+        <div class="span2">
+          <div class="module">
+
+            <ul class="nav nav-pills nav-stacked">
+              <li class="active"><a class="list-link js-nav" href="#conta"> Conta <i class="chev-right"></i></a></li>
+              <li class=""><a class="list-link js-nav" href="#senha">Senha<i class="chev-right"></i></a></li>
+              <li class=""><a class="list-link js-nav" href="/settings/devices" data-nav="devices">Celular <i class="chev-right"></i></a></li>
+              <li class=""><a class="list-link js-nav" href="/settings/notifications" data-nav="notifications">Notificações por e-mail <i class="chev-right"></i></a></li>
+              <li class=""><a class="list-link js-nav" href="/settings/profile" data-nav="profile">Perfil <i class="chev-right"></i></a></li>
+            </ul>
+
+          </div>          
+        </div>
+        <div class="span10">
+
+          <div id="list-user" class="content scaffold-list" role="main">
+
+            <div class="tab-pane active" id="conta">
+
+              <div class="row-fluid">                
+                <div class="span8 offset1">
+
+                  <h3><g:message code="my.text.form.edit.conta" /></h3>           
+                  <h5><p class="muted"><g:message code="my.text.form.edit.conta.conteudo" /> </p></h5>   
+                  <hr>
+                  
+                  <div class="row-fluid">  
+                    <div class="span8 offset1"  style="border: 1px solid gainsboro">
+                      
+                      <g:form method="post" >                      
+                        <fieldset>        
+                          <g:render template="editForm"/>              
+                        </fieldset>
+                        <fieldset>
+                          <g:actionSubmit class="btn btn-success btn-large" action="update" controlle="user" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                          <g:actionSubmit class="btn btn-danger btn-large" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                        </fieldset>
+                      </g:form>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  $(function () {
+    $('#tabs-menu a').click(function (e) {
+e.preventDefault();
+$(this).tab('show');
+})
+})
+</script>
+</body>
+</html>
