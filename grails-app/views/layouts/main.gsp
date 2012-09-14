@@ -3,8 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <title> <g:message code="my.text.welcomeTitle"/></title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-    <script src="${resource(dir: 'js', file: 'bootstrap.js')}"></script>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
@@ -32,7 +30,7 @@
             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user icon-white"></i><span class="caret"></span></a>
 
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown">
-              <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+                <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
               <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
               <li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
               <li class="divider"></li>

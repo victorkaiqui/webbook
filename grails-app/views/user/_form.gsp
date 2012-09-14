@@ -1,11 +1,11 @@
 <%@ page import="br.com.webbook.User" %>
 
 <div>
-  <g:textField name="name" maxlength="15"  value="${userInstance?.name}" class="input-big" placeholder="${message(code: 'user.name.label', default: 'name')}"/>
+  <g:textField name="name" maxlength="15" required="" value="${userInstance?.name}" class="input-big" placeholder="${message(code: 'user.name.label', default: 'name')}"/>
 </div>
 
 <div>
-  <g:textField name="lastName" maxlength="15"  value="${userInstance?.lastName}" class="input-big" placeholder="${message(code: 'user.lastName.label', default: 'lastName')}"/>
+  <g:textField name="lastName" maxlength="15" required="" value="${userInstance?.lastName}" class="input-big" placeholder="${message(code: 'user.lastName.label', default: 'lastName')}"/>
 </div>
 
 <div>

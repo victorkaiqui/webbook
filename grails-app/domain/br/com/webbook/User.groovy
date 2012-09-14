@@ -30,7 +30,7 @@ class User {
         username blank: false, unique: true , size: 5..15
         email blank: false ,email: true
         password blank: false , password : true      
-        birthyday widget : 'datePicker' , blank:true
+        birthyday widget : 'datePicker'
     }
 
     static mapping = {

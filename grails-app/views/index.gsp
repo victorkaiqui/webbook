@@ -10,12 +10,13 @@
   <div class="row-fluid">
 
     <div class="span4" style="border: 1px solid gainsboro" >
-
-
+      <div class="bs-docs-example form-horizontal">
       <strong><sec:loggedInUserInfo field="username"/> </strong>
-
-
+      <li class="divider"></li>
+      </div>
     </div>
+
+
 
     <div class="span8" style="border: 1px solid gainsboro">
 
@@ -34,11 +35,9 @@
 
   <div class="row">
     <div class="span4">
-
       <g:if test='${flash.message}'>
         <div >${flash.message}</div>
       </g:if>
-
       <section >
         <h3><g:message code="my.text.index.organize"/></h3>
         <p><g:message code="my.text.index.organize.conteudo"/></p>
@@ -58,10 +57,10 @@
 
       <section>          
 
-        <g:form url="[controller:'j_spring_security_check', action:'']">
+        <g:form url="[action:'auth', controller:'login']">
           <fieldset>
-            <g:render template="/login/form"/>
-            <g:submitButton name="login" value="${message(code: 'default.button.login.label', default: 'Login')}" class="btn btn-info btn-large"/>
+            <g:render template="/indexLoginForm"/>
+            <g:submitButton name="login" value="${message(code: 'default.button.login.label', default: 'Login')}" class="btn btn-warning btn-large"/>
             <facebookAuth:connect permissions="email,user_about_me"/>
           </fieldset>
         </g:form>
