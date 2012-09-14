@@ -31,18 +31,15 @@
           <div class="btn-group pull-right">
             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user icon-white"></i><span class="caret"></span></a>
 
-
-
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown">
-              <li><a href="#"><i class="icon-pencil"></i> ${fieldValue(bean: userInstance, field: "username")}</a></li>
+              <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
               <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
               <li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
               <li class="divider"></li>
               <li><a href="#"><i class="i"></i> Make admin</a></li>
             </ul>
-
           </div>
-          </g:each> 
+
         </sec:ifLoggedIn>
 
       </div>

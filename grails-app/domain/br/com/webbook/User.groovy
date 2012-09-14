@@ -25,12 +25,12 @@ class User {
     
 
     static constraints = {
-        name blank: false , nullable : true , size: 3..15  
-        lastName blank: false , nullable : true , size: 3..15        
+        name blank: false , size: 3..15  
+        lastName blank: false , size: 3..15        
         username blank: false, unique: true , size: 5..15
         email blank: false ,email: true
         password blank: false , password : true      
-        birthyday widget : 'datePicker' , nullable : true , blank:true
+        birthyday widget : 'datePicker' , blank:true
     }
 
     static mapping = {
