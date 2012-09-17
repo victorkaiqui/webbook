@@ -48,17 +48,6 @@ class UserController {
         [userInstance: userInstance]
     }
 
-    def edit(Long id) {
-        def userInstance = User.get(id)
-        if (!userInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
-            redirect(action: "list")
-            return
-        }
-
-        [userInstance: userInstance]
-    }
-    
     def editProfile() {
         def userInstance = springSecurityService.currentUser
         if (!userInstance) {
@@ -75,6 +64,7 @@ class UserController {
         
         render(view: "config", model: [userInstance: userInstance])
     }
+    
     def update(Long id, Long version) {
         def userInstance = User.get(id)
         if (!userInstance) {
@@ -96,12 +86,12 @@ class UserController {
         userInstance.properties = params
 
         if (!userInstance.save(flush: true)) {
-            render(view: "edit", model: [userInstance: userInstance])
+            render(view: "config", model: [userInstance: userInstance])
             return
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-        redirect(action: "show", id: userInstance.id)
+        redirect(action: "config", id: userInstance.id)
     }
 
     def delete() {

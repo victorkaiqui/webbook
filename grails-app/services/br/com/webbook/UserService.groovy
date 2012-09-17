@@ -5,4 +5,9 @@ class UserService {
     def serviceMethod() {
 
     }
+    
+    def follow(){
+        
+        
+    }
 }

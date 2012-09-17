@@ -45,9 +45,7 @@
 
           <div class="span8" >
 
-
             <section>
-
 
               <ul class="nav nav-tabs" id="tabs-menu">
                 <li class="active"><a href="#login">Login</a></li>
@@ -57,7 +55,7 @@
               <div class="tab-content">
                 <div class="tab-pane active" id="login">
                   <h3><g:message code="my.text.index.label"/></h3>
-                  <img src="img/webook.jpg" >
+
                   <g:form url="[controller:'j_spring_security_check', action:'']">
                     <fieldset>
                       <g:render template="/login/form"/>
@@ -65,18 +63,21 @@
                       <facebookAuth:connect permissions="email,user_about_me"/>
                     </fieldset>
                   </g:form>
+
                 </div>
 
                 <div class="tab-pane" id="cadastrar">
                   <h3><g:message code="my.text.index.cadastro"/></h3>
-                  <img src="img/webook.jpg" >
+
                   <g:form url="[action:'save', controller:'user']">
                     <fieldset>
                       <g:render template="/indexCreateForm" />
                       <g:submitButton name="create" value="${message(code: 'default.button.create.label', default: 'Create')}" class="btn btn-warning btn-large"/>
                     </fieldset>
                   </g:form>
+
                 </div>
+
             </section>
 
           </div>
