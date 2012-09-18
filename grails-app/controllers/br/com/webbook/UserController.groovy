@@ -9,22 +9,24 @@ class UserController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
-        redirect(action: "list", params: params)
-    }
-    
+        redirect(action: "config", params: params)
+    }    
    
-    def list(Integer max) {
-        //        params.max = Math.min(max ?: 10, 100)
-        def user = springSecurityService.currentUser
-        [userInstance: user]
+    def profile(){
+        
+        def user = User.findByUsername(params.username)
+        def userInstance = springSecurityService.currentUser
+        
+        render (view : "profile", model: [user : user])
+        
     }
-
     def create() {
         [userInstance: new User(params)]
     }
 
     def save() {
         def userInstance = new User(params)
+      
         if (!userInstance.save(flush: true)) {
             render(view: "create", model: [userInstance: userInstance])
             return
@@ -36,29 +38,43 @@ class UserController {
         springSecurityService.reauthenticate(userInstance.getUsername(),userInstance.getPassword())
 
     }
- 
-    def show(Long id) {
-        def userInstance = User.get(id)
-        if (!userInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
-            redirect(action: "list")
-            return
-        }
-
-        [userInstance: userInstance]
-    }
 
     def editProfile() {
         def userInstance = springSecurityService.currentUser
+        
         if (!userInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
-            redirect(action: "list")
+            redirect(action: "config")
             return
         }
 
-        render(view: "edit", model: [userInstance: userInstance])
+        render(view: "config", model: [userInstance: userInstance])
     }
 
+    def editPassword(String password , String newPassword, String confirmPassword){
+        
+        def userInstance = springSecurityService.currentUser
+        userInstance = User.get(userInstance.id)
+        
+        password = springSecurityService.encodePassword(password)
+        
+        if(userInstance.password == password && newPassword == confirmPassword){
+            
+            newPassword = springSecurityService.encodePassword(newPassword)             
+            userInstance.password = newPassword
+           
+            if (!userInstance.save(flush: true)) {
+                render(view: "config", model: [userInstance: userInstance])
+                return
+            }
+            
+            redirect(action: "config")
+            
+        }
+        
+        render(view: "config", model: [userInstance: userInstance])
+    }
+    
     def config() {
         def userInstance = springSecurityService.currentUser
         
@@ -66,10 +82,12 @@ class UserController {
     }
     
     def update(Long id, Long version) {
-        def userInstance = User.get(id)
+        
+        def userInstance = springSecurityService.currentUser
+         
         if (!userInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
-            redirect(action: "list")
+            redirect(action: "config")
             return
         }
 
@@ -95,25 +113,27 @@ class UserController {
     }
 
     def delete() {
+       
         def userInstance = springSecurityService.currentUser
         userInstance = User.get(userInstance.id)
+        
         if (!userInstance) {
             
             
             
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
-            redirect(action: "list")
+            redirect(action: "config")
             return
         }
 
         try {
             userInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
-            redirect(action: "list")
+            redirect(action: "config")
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
-            redirect(action: "show", id: id)
+            redirect(action: "config", id: id)
         }
     }
 }

@@ -53,6 +53,7 @@
               </ul>
 
               <div class="tab-content">
+                
                 <div class="tab-pane active" id="login">
                   <h3><g:message code="my.text.index.label"/></h3>
 
