@@ -7,10 +7,21 @@
 
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Sample title</title>
+    <meta name="layout" content="main"/>
+    <title>${user.username}</title>
   </head>
   <body>
-    <h1>${user.username}</h1>
+    
+    <div class="row-fluid">
+      <div span="4" style="background: black">
+
+        <avatar:gravatar email="${user.email}" alt="${user.username}" cssClass="img-circle" size="128"/>
+
+      </div>
+      <div span="8" style="background: black">
+        <h1 class="fullname">${user.username}</h1>
+      </div>
+    </div>
+    
   </body>
 </html>

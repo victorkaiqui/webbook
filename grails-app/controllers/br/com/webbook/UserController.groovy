@@ -9,6 +9,7 @@ class UserController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
+       
         redirect(action: "config", params: params)
     }    
    
@@ -17,7 +18,7 @@ class UserController {
         def user = User.findByUsername(params.username)
         def userInstance = springSecurityService.currentUser
         
-        render (view : "profile", model: [user : user])
+        render (view : "profile", model: [user : user , userInstance : userInstance])
         
     }
     def create() {
@@ -76,9 +77,11 @@ class UserController {
     }
     
     def config() {
-        def userInstance = springSecurityService.currentUser
         
-        render(view: "config", model: [userInstance: userInstance])
+        def user = springSecurityService.currentUser
+        
+        render(view: "config", model: [user: user])
+        
     }
     
     def update(Long id, Long version) {
