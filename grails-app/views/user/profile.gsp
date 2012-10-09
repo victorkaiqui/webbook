@@ -11,7 +11,7 @@
     <title>${user.username}</title>
   </head>
   <body>
-    
+
     <div class="row-fluid">
       <div span="4" style="background: black">
 
@@ -22,6 +22,6 @@
         <h1 class="fullname">${user.username}</h1>
       </div>
     </div>
-    
+
   </body>
 </html>

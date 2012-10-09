@@ -3,11 +3,11 @@ package br.com.webbook
 import org.springframework.dao.DataIntegrityViolationException
 
 class BookmarkController {
-
+    def springSecurityService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
-        redirect(action: "list", params: params)
+        redirect(uri:"/", params: params)
     }
 
     def list(Integer max) {
@@ -21,13 +21,15 @@ class BookmarkController {
 
     def save() {
         def bookmarkInstance = new Bookmark(params)
+        
+        
         if (!bookmarkInstance.save(flush: true)) {
             render(view: "create", model: [bookmarkInstance: bookmarkInstance])
             return
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), bookmarkInstance.id])
-        redirect(action: "show", id: bookmarkInstance.id)
+        redirect(uri:"/", id: bookmarkInstance.id)
     }
 
     def show(Long id) {
@@ -63,7 +65,7 @@ class BookmarkController {
         if (version != null) {
             if (bookmarkInstance.version > version) {
                 bookmarkInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'bookmark.label', default: 'Bookmark')] as Object[],
+                    [message(code: 'bookmark.label', default: 'Bookmark')] as Object[],
                           "Another user has updated this Bookmark while you were editing")
                 render(view: "edit", model: [bookmarkInstance: bookmarkInstance])
                 return

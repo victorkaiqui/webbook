@@ -2,6 +2,8 @@ package br.com.webbook
 
 class Bookmark {
     
+    transient springSecurityService
+    
     Date dateCreated
     Date lastUpdated
     

@@ -9,9 +9,18 @@ class UserController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
-       
-        redirect(action: "config", params: params)
+        
+        def user = springSecurityService.currentUser
+        
+        render(view:"/index", model: [user : user] )
+        
+        
     }    
+    def list(){
+        def user = springSecurityService.currentUser
+        
+        [userInstance: user]
+    }
    
     def profile(){
         
@@ -35,7 +44,8 @@ class UserController {
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
 
-        redirect(uri: "/" , id: userInstance.id)
+        redirect(uri:"/" , id: userInstance.id)
+        
         springSecurityService.reauthenticate(userInstance.getUsername(),userInstance.getPassword())
 
     }
