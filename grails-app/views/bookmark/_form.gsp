@@ -15,13 +15,6 @@
 </div>
 <div>
   <label>
-    <g:message code="bookmark.user.label" default="User" />
-    <span class="required-indicator">*</span>
-  </label>
-  <g:select id="user" name="user.id" from="${br.com.webbook.User.list()}" optionKey="id" required="" value="${bookmarkInstance?.user?.id}" class="many-to-one"/>
-  </div>
-<div>
-  <label>
     <g:checkBox name="visibility" value="${bookmarkInstance?.visibility}"/>
     <g:message code="bookmark.visibility.label" default="visibility" />
   </label>

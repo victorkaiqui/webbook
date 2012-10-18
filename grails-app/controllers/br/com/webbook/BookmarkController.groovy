@@ -12,6 +12,7 @@ class BookmarkController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
+        
         [bookmarkInstanceList: Bookmark.list(params), bookmarkInstanceTotal: Bookmark.count()]
     }
 
@@ -21,8 +22,9 @@ class BookmarkController {
 
     def save() {
         def bookmarkInstance = new Bookmark(params)
+        def user = springSecurityService.currentUser
         
-        
+        bookmarkInstance.setUser(user)
         if (!bookmarkInstance.save(flush: true)) {
             render(view: "create", model: [bookmarkInstance: bookmarkInstance])
             return

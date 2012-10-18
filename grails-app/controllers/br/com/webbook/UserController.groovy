@@ -7,18 +7,10 @@ class UserController {
     def springSecurityService
     
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
-    def index() {
-        
-        def user = springSecurityService.currentUser
-        
-        render(view:"/index", model: [user : user] )
-        
-        
-    }    
+ 
     def list(){
         def user = springSecurityService.currentUser
-        
+      
         [userInstance: user]
     }
    

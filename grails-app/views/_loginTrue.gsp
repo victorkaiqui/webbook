@@ -4,7 +4,10 @@
   <div class="row-fluid">
     <div class="span2">
 
-      <h3><sec:loggedInUserInfo field="username"/></h3>
+      <div> 
+        <avatar:gravatar email="${user.email}" alt="${user.username}" cssClass="img-circle" size="42"/>
+        <h4><sec:loggedInUserInfo field="username"/></h4>
+      </div>
 
       <div class="container">  
         <div id="example" class="modal hide fade in" style="display: none; ">  
