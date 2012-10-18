@@ -12,7 +12,7 @@ class IndexController {
             render(view:"/index", model: [user : user] )
         }
         else {
-           render(view:"/index" )
+            render(view:"/index" )
         }
          
     }

@@ -5,14 +5,9 @@ import org.springframework.dao.DataIntegrityViolationException
 class UserController {
     
     def springSecurityService
+    def userService
     
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
- 
-    def list(){
-        def user = springSecurityService.currentUser
-      
-        [userInstance: user]
-    }
    
     def profile(){
         
@@ -40,6 +35,18 @@ class UserController {
         
         springSecurityService.reauthenticate(userInstance.getUsername(),userInstance.getPassword())
 
+    }
+    
+    def follow(){
+        
+        def userFollowed = User.findByUsername(params.username)
+        println params.username
+        def userFollower = springSecurityService.currentUser
+        
+        userService.follow(userFollowed , userFollower )
+
+        redirect(action:"profile")
+             
     }
 
     def editProfile() {

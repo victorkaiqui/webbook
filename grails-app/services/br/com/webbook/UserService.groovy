@@ -5,9 +5,12 @@ class UserService {
     def serviceMethod() {
 
     }
+  
     
-    def follow(){
+    def follow(User userFollower, User userFollowed){
         
-        
+        if(userFollower != userFollowed ){
+            new Friendship(follower: userFollower, followed: userFollowed).save(flush: true)
+        }
     }
 }

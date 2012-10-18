@@ -21,6 +21,7 @@ class BookmarkController {
     }
 
     def save() {
+        
         def bookmarkInstance = new Bookmark(params)
         def user = springSecurityService.currentUser
         
