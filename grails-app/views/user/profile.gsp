@@ -22,14 +22,24 @@
         </span>
 
         <g:form url="[action:'follow', controller:'user']">
+          
           <g:hiddenField name="username" value="${user.username}" />
-          <g:submitButton name="segir" value="Seguir" class="btn btn-small btn-success"/>
+
+          <g:if test="${isFollowing}">
+            <g:submitButton name="segir" value="Seguir" class="btn btn-small btn-danger"/>           
+          </g:if>
+          <g:else>
+            <g:submitButton name="segir" value="Seguir" class="btn btn-small btn-success"/>            
+          </g:else>
+
         </g:form>
 
       </div>
 
       <div span="8" >
-
+        <g:each var="followed" in="${userInstance.followings}">
+          <p>${followed.followed.username}</p>
+        </g:each>
       </div>
     </div>
 

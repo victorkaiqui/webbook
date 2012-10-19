@@ -10,7 +10,9 @@ class UserService {
     def follow(User userFollower, User userFollowed){
         
         if(userFollower != userFollowed ){
-            new Friendship(follower: userFollower, followed: userFollowed).save(flush: true)
+            def friendship = new Friendship(follower: userFollower, followed: userFollowed).save(flush: true)
+            userFollower.addToFollowings(friendship).save()
+            userFollowed.addToFollowers(friendship).save()
         }
     }
 }

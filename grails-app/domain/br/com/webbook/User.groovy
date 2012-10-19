@@ -34,7 +34,7 @@ class User {
     }
 
     static mapping = {
-        password column: '`password`'
+        password column: '`password`'      
     }
 
     Set<Authority> getAuthorities() {
@@ -53,5 +53,17 @@ class User {
 
     protected void encodePassword() {
         password = springSecurityService.encodePassword(password)
+    }
+    
+    public boolean isFollowing(User user){
+       
+        for(Friendship f: followings){
+            if(f.followed == user){                
+                return true                
+            }
+            
+        }
+         
+        return false
     }
 }

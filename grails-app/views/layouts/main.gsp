@@ -39,7 +39,7 @@
 
               <li class="divider"></li>
 
-              <li><i class="i"></i><g:link controller="logout" >sign out</g:link></li>
+              <li><i class="i"></i><g:link controller="logout" >Sair</g:link></li>
 
             </ul>
           </div>

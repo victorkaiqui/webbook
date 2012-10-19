@@ -13,10 +13,24 @@ class UserController {
         
         def user = User.findByUsername(params.username)
         def userInstance = springSecurityService.currentUser
+        userInstance = User.get(userInstance.id)
+
+        def isFollowing = userInstance.isFollowing(user)
+        render (view : "profile", model: [user : user , userInstance : userInstance, isFollowing: isFollowing])
         
-        render (view : "profile", model: [user : user , userInstance : userInstance])
+    }    
+       
+    def follow(){
+              
+        def userFollowed = User.findByUsername(params.username)
+        def userFollower = springSecurityService.currentUser        
         
+        userService.follow(userFollower, userFollowed)
+
+        redirect(action:"profile", params: [username: userFollowed.username])
+             
     }
+    
     def create() {
         [userInstance: new User(params)]
     }
@@ -36,19 +50,7 @@ class UserController {
         springSecurityService.reauthenticate(userInstance.getUsername(),userInstance.getPassword())
 
     }
-    
-    def follow(){
-        
-        def userFollowed = User.findByUsername(params.username)
-        println params.username
-        def userFollower = springSecurityService.currentUser
-        
-        userService.follow(userFollowed , userFollower )
-
-        redirect(action:"profile")
-             
-    }
-
+ 
     def editProfile() {
         def userInstance = springSecurityService.currentUser
         
@@ -129,10 +131,7 @@ class UserController {
         def userInstance = springSecurityService.currentUser
         userInstance = User.get(userInstance.id)
         
-        if (!userInstance) {
-            
-            
-            
+        if (!userInstance) {                          
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
             redirect(action: "config")
             return
