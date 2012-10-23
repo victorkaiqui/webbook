@@ -60,10 +60,9 @@ class User {
         for(Friendship f: followings){
             if(f.followed == user){                
                 return true                
-            }
-            
+            }            
         }
-         
+        
         return false
     }
 }

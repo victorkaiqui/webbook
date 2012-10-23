@@ -30,6 +30,8 @@ class UserController {
         redirect(action:"profile", params: [username: userFollowed.username])
              
     }
+  
+
     
     def create() {
         [userInstance: new User(params)]

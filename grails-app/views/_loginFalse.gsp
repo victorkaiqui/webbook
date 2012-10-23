@@ -1,4 +1,8 @@
 <facebookAuth:init />
+
+
+<title> <g:message code="my.text.welcomeTitle"/></title>
+
 <div class="row">
 
   <div class="span4">

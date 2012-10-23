@@ -10,7 +10,7 @@
   <g:textArea name="description"  value="${bookmarkInstance?.description}" class="input-big" placeholder="${message(code: 'bookmark.description.label', default: 'description')}"/>
 </div> 
 <div>
-  <g:textField name="tags"  value="${bookmarkInstance?.tags}" class="input-big" placeholder="${message(code: 'bookmark.tags.label', default: 'tags')}"/>
+  <g:textField id="tags" name="tags"  value="${bookmarkInstance?.tags}" class="input-big" placeholder="${message(code: 'bookmark.tags.label', default: 'tags')}"/>
 </div>
 <div>
   <label>

@@ -2,13 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title> <g:message code="my.text.welcomeTitle"/></title>
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script src="${resource(dir: 'js', file: 'bootstrap.js')}"></script>
+    <script src="${resource(dir: 'js', file: 'jquery.tagsinput.js')}"></script>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css')}" type="text/css">  
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
-
+    <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'jquery.tagsinput.css')}" />
   <g:layoutHead />
   <r:layoutResources />
 </head>

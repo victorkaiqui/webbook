@@ -6,14 +6,28 @@ class BookmarkController {
     def springSecurityService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index() {
-        redirect(uri:"/", params: params)
+    
+    def list(){
+        
+        def user = springSecurityService.currentUser
+        user = User.get(user.id)
+               
+        [bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user)]
     }
 
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    def timeline(){
         
-        [bookmarkInstanceList: Bookmark.list(params), bookmarkInstanceTotal: Bookmark.count()]
+        def user = springSecurityService.currentUser
+        user = User.get(user.id)
+        
+        def timelineList = []
+        user.followings.each {
+            timelineList.addAll(it.followed.bookmarks)  
+        }
+        timelineList.addAll(user.bookmarks)
+        timelineList.sort{it.dateCreated}
+        
+        render(view:"/index", model: [user : user , bookmarkInstanceTotal: Bookmark.countByUser(user), timelineList: timelineList] )
     }
 
     def create() {
@@ -26,6 +40,7 @@ class BookmarkController {
         def user = springSecurityService.currentUser
         
         bookmarkInstance.setUser(user)
+        
         if (!bookmarkInstance.save(flush: true)) {
             render(view: "create", model: [bookmarkInstance: bookmarkInstance])
             return
