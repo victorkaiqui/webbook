@@ -20,9 +20,16 @@
         <span class="help-inline">
           <h1 class="fullname">${user.username}</h1>
         </span>
+        
+        Favoritos
+${bookmarkInstanceTotal}
+        Seguindo
+${user.followings.size()}
+        Seguidores
+${user.followers.size()}
 
         <g:form url="[action:'follow', controller:'user']">
-          
+
           <g:hiddenField name="username" value="${user.username}" />
 
           <g:if test="${isFollowing}">

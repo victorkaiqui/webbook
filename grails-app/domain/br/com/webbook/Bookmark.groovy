@@ -16,8 +16,9 @@ class Bookmark {
     boolean visibility
 
     static constraints = {
-        title nullable : true
-        url url: true
+        url url: true 
+        encodeUrl nullable : true
+        title nullable : true        
         description nullable : true
         tags nullable : true
         visibility nullable : true

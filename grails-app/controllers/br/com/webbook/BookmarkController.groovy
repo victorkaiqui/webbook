@@ -105,14 +105,14 @@ class BookmarkController {
         def bookmarkInstance = Bookmark.get(id)
         if (!bookmarkInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), id])
-            redirect(action: "list")
+            redirect(action: "timeline")
             return
         }
 
         try {
             bookmarkInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), id])
-            redirect(action: "list")
+            redirect(action: "timeline")
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), id])

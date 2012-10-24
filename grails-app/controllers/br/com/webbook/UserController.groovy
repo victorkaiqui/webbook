@@ -16,7 +16,7 @@ class UserController {
         userInstance = User.get(userInstance.id)
 
         def isFollowing = userInstance.isFollowing(user)
-        render (view : "profile", model: [user : user , userInstance : userInstance, isFollowing: isFollowing])
+        render (view : "profile", model: [user : user , userInstance : userInstance, isFollowing: isFollowing , bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user)])
         
     }    
        
