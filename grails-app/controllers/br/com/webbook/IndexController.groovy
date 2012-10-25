@@ -17,6 +17,8 @@ class IndexController {
             timelineList.addAll(user.bookmarks)
             timelineList.sort{a , b -> b.dateCreated <=> a.dateCreated}
         
+            
+            
             render(view:"/index", model: [user : user , bookmarkInstanceTotal: Bookmark.countByUser(user), timelineList: timelineList] )
         }
         else {

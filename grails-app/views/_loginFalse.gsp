@@ -41,7 +41,7 @@
             <fieldset>
               <g:render template="/login/form"/>
               <g:submitButton name="login" value="${message(code: 'default.button.login.label', default: 'Login')}" class="btn btn btn-info btn-large"/>
-              <facebookAuth:connect permissions="email,user_about_me"/>
+<!--              <facebookAuth:connect permissions="email,user_about_me"/>-->
             </fieldset>
           </g:form>
 

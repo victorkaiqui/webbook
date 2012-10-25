@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class BookmarkController {
     def springSecurityService
+    def bookmarkService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     
@@ -20,14 +21,14 @@ class BookmarkController {
         def user = springSecurityService.currentUser
         user = User.get(user.id)
         
-        def timelineList = []
+        def bookmarkTimeline = []
         user.followings.each {
-            timelineList.addAll(it.followed.bookmarks)  
+            bookmarkTimeline.addAll(it.followed.bookmarks)  
         }
-        timelineList.addAll(user.bookmarks)
-        timelineList.sort{it.dateCreated}
+        bookmarkTimeline.addAll(user.bookmarks)
+        bookmarkTimeline.sort{it.dateCreated}
         
-        render(view:"/index", model: [user : user , bookmarkInstanceTotal: Bookmark.countByUser(user), timelineList: timelineList] )
+        render(view:"/index", model: [user : user , bookmarkInstanceTotal: Bookmark.countByUser(user), bookmarkTimeline: bookmarkTimeline] )
     }
 
     def create() {
@@ -50,6 +51,11 @@ class BookmarkController {
         redirect(uri:"/", id: bookmarkInstance.id)
     }
 
+    def preview(){
+        render bookmarkService.webScrap(param.url)
+        
+    }
+    
     def show(Long id) {
         def bookmarkInstance = Bookmark.get(id)
         if (!bookmarkInstance) {
