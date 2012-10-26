@@ -73,93 +73,96 @@
     </div>
 
     <div class="thumbnail span8">
+      
       <h4>Favoritos:</h4>
       <hr> 
 
-      <g:each in="${bookmarkTimeline}" status="i" var="bookmarkInstance">
+      <div class="row-fluid">
 
-        <div class="thumbnail span3">
-          <img src="http://placehold.it/260x180" alt="Sample Image">
-        </div>
+        <g:each in="${timelineList}" status="i" var="bookmarkInstance">
 
-        <div class="span8">
+          <div class="span2">
+            <avatar:gravatar email="${bookmarkInstance.user.email}" alt="${bookmarkInstance.user.username}"  cssClass="img-rounded" size="42" defaultGravatarUrl="mm" />
+          </div>
 
-          <div class="acoes" style="display: none; position: relative;">      
-            <g:if test="${user.id == bookmarkInstance.user.id}">   
+          <div class="span9">
 
-              <g:form controller="bookmark">
-                <g:hiddenField name="id" value="${bookmarkInstance?.id}" />
-                <g:actionSubmit class="btn btn-mini btn-danger" action="delete" style="position: absolute; right: 0;" value="x" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-              </g:form>
+            <div class="acoes" style="display: none; position: relative;">      
 
-            </g:if>
-          </div>  
+              <g:if test="${user.id == bookmarkInstance.user.id}">   
 
-          <g:link controller="user" action="profile" id="${bookmarkInstance.id}">
-            <h5>${bookmarkInstance.user.username}</h5>
-    <!--            <small><g:formatDate format="dd/MM/yyyy HH:mm" date="${bookmarkInstance.dateCreated}"/></small>-->
-          </g:link>
+                <g:form controller="bookmark">
+                  <g:hiddenField name="id" value="${bookmarkInstance?.id}" />
+                  <g:actionSubmit class="btn btn-mini btn-danger" action="delete" style="position: absolute; right: 0;" value="x" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                </g:form>
 
-          <g:link controller="bookmark" action="show" id="${bookmarkInstance.id}">
-            <h5>${fieldValue(bean: bookmarkInstance, field: "title")}</h5>
-          </g:link>
+              </g:if>
 
-          <p><small><a href="${fieldValue(bean: bookmarkInstance, field: "url")}">${fieldValue(bean: bookmarkInstance, field: "url")}</a></small></p>          
-          <p>${fieldValue(bean: bookmarkInstance, field: "description")}</p>
+            </div>  
 
-          <div class="acoes" style="display: none">
+            <g:link controller="user" action="profile" id="${bookmarkInstance.id}">
+              <h5>${bookmarkInstance.user.username}</h5>
+            </g:link>
 
-            <a href="#" class="btn btn-mini btn-primary">Action</a>
-            <a href="#" class="btn btn-mini">Action</a>
+            <g:link controller="bookmark" action="show" id="${bookmarkInstance.id}">
+              <h5>${fieldValue(bean: bookmarkInstance, field: "title")}</h5>
+            </g:link>
 
-          </div> 
+            <p><small><a href="${fieldValue(bean: bookmarkInstance, field: "url")}">${fieldValue(bean: bookmarkInstance, field: "url")}</a></small></p>          
+            <p>${fieldValue(bean: bookmarkInstance, field: "description")}</p>
 
-          <hr>         
-        </div>
+            <div class="acoes" style="display: none">
+              
+              <a href="#" class="btn btn-mini btn-primary">Action</a>             
 
-      </g:each>
+            </div> 
 
+            <hr>         
+          </div>
+
+        </g:each>
+      </div>
+      
     </div>
   </div>
 </div>
 
 
 <script>
-   $(document).ready(function(){
-  $("div.span8").hover(
-    function(){
-      $(this).find("div.acoes").show();
-    },
-    function(){
-      $(this).find("div.acoes").hide();
-    }
-    );
+  $(document).ready(function(){
+    $("div.span9").hover(
+      function(){
+        $(this).find("div.acoes").show();
+      },
+      function(){
+        $(this).find("div.acoes").hide();
+      }
+      );
 
-  $("#tags").tagsInput({
-    'defaultText':'Adicione tags',
-    'height':'100px',
-    'width':'215px',
-    'placeholderColor' :'#B8B8B8'
-  });
+    $("#tags").tagsInput({
+      'defaultText':'Adicione tags',
+      'height':'100px',
+      'width':'215px',
+      'placeholderColor' :'#B8B8B8'
+    });
 
-  $('#campo').focus(function() { 
-    $("#acoes").show();
-  }); 
-
-  $('#campo').blur( function() {   
-    $("#acoes").hide();
-  });
-
-  $('#openBookmarkModal').click(function() {
-    var url =  $("#bookmarkUrl").val();
-    
-    $.getJSON('${request.contextPath}/bookmark/preview', {url: url} , function(data){
-      $("#url").val(data.url);
-      $("#title").val(data.title);
+    $('#campo').focus(function() { 
+      $("#acoes").show();
     }); 
 
-    $('#bookmarkModal').modal();
+    $('#campo').blur( function() {   
+      $("#acoes").hide();
+    });
 
-  }); 
+    $('#openBookmarkModal').click(function() {
+      var url =  $("#bookmarkUrl").val();
+      
+      $.getJSON('${request.contextPath}/bookmark/preview', {url: url} , function(data){
+$("#url").val(data.url);      
+}); 
+
+$('#bookmarkModal').modal();
+
+}); 
 })
 </script>

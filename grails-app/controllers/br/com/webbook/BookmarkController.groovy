@@ -21,14 +21,14 @@ class BookmarkController {
         def user = springSecurityService.currentUser
         user = User.get(user.id)
         
-        def bookmarkTimeline = []
+        def timelineList = []
         user.followings.each {
-            bookmarkTimeline.addAll(it.followed.bookmarks)  
+            timelineList.addAll(it.followed.bookmarks)  
         }
-        bookmarkTimeline.addAll(user.bookmarks)
-        bookmarkTimeline.sort{it.dateCreated}
+        timelineList.addAll(user.bookmarks)
+        timelineList.sort{it.dateCreated}
         
-        render(view:"/index", model: [user : user , bookmarkInstanceTotal: Bookmark.countByUser(user), bookmarkTimeline: bookmarkTimeline] )
+        render(view:"/index", model: [user : user , bookmarkInstanceTotal: Bookmark.countByUser(user), timelineList: timelineList] )
     }
 
     def create() {
