@@ -9,14 +9,27 @@ class BookmarkController {
 
     
     def list(){
-        
+              
         def user = springSecurityService.currentUser
         user = User.get(user.id)
-               
+         
+          
+        Bookmark.findByUser(user).each{
+            println "oi"
+            it.tags.each{ tag ->
+                println tag
+            }
+
+        }
+        
         [bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user)]
+  
+        
     }
 
     def timeline(){
+        
+        
         
         def user = springSecurityService.currentUser
         user = User.get(user.id)
@@ -28,6 +41,7 @@ class BookmarkController {
         timelineList.addAll(user.bookmarks)
         timelineList.sort{it.dateCreated}
         
+    
         render(view:"/index", model: [user : user , bookmarkInstanceTotal: Bookmark.countByUser(user), timelineList: timelineList] )
     }
 

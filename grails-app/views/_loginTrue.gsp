@@ -7,7 +7,7 @@
         <title> Webbook - <sec:loggedInUserInfo field="username"/></title>
 
         <div class="row-fluid" style="text-align: center">
-          <avatar:gravatar email="${user.email}" alt="${user.username}"  cssClass="img-circle" size="42" defaultGravatarUrl="mm" />
+          <avatar:gravatar email="${user.email}" alt="${user.username}"  cssClass="img-circle" size="32" defaultGravatarUrl="mm" />
           <h4>${user.username}</h4>
         </div>
         <hr>
@@ -69,23 +69,22 @@
 
 
       </div>
-
     </div>
 
     <div class="thumbnail span8">
-      
+
       <h4>Favoritos:</h4>
-      <hr> 
+      <hr>      
 
-      <div class="row-fluid">
+      <g:each in="${timelineList}" status="i" var="bookmarkInstance">
 
-        <g:each in="${timelineList}" status="i" var="bookmarkInstance">
+        <div class="row-fluid">
 
-          <div class="span2">
+          <div class="span1">
             <avatar:gravatar email="${bookmarkInstance.user.email}" alt="${bookmarkInstance.user.username}"  cssClass="img-rounded" size="42" defaultGravatarUrl="mm" />
           </div>
 
-          <div class="span9">
+          <div class="thumbnail span11">
 
             <div class="acoes" style="display: none; position: relative;">      
 
@@ -100,29 +99,29 @@
 
             </div>  
 
-            <g:link controller="user" action="profile" id="${bookmarkInstance.id}">
-              <h5>${bookmarkInstance.user.username}</h5>
-            </g:link>
+            <a href="${request.contextPath}/${bookmarkInstance.user.username}">
+              <h4 style="margin-top: 0">${bookmarkInstance.user.username}</h4>
+            </a>
 
             <g:link controller="bookmark" action="show" id="${bookmarkInstance.id}">
-              <h5>${fieldValue(bean: bookmarkInstance, field: "title")}</h5>
+              <h5 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}</h5>
             </g:link>
 
-            <p><small><a href="${fieldValue(bean: bookmarkInstance, field: "url")}">${fieldValue(bean: bookmarkInstance, field: "url")}</a></small></p>          
+            <small style="margin-top: 0"><a href="${fieldValue(bean: bookmarkInstance, field: "url")}">${fieldValue(bean: bookmarkInstance, field: "url")}</a></small>        
             <p>${fieldValue(bean: bookmarkInstance, field: "description")}</p>
 
             <div class="acoes" style="display: none">
-              
+
               <a href="#" class="btn btn-mini btn-primary">Action</a>             
 
             </div> 
-
-            <hr>         
           </div>
+          
+        </div>
+        <hr>
+      </g:each>
 
-        </g:each>
-      </div>
-      
+
     </div>
   </div>
 </div>
@@ -130,7 +129,7 @@
 
 <script>
   $(document).ready(function(){
-    $("div.span9").hover(
+    $("div.span11").hover(
       function(){
         $(this).find("div.acoes").show();
       },

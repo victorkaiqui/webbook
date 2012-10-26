@@ -1,7 +1,7 @@
 package br.com.webbook
 
-class User {
-
+class User {      
+    
     transient springSecurityService
     
     Date dateCreated
@@ -18,9 +18,9 @@ class User {
     static hasMany = [bookmarks : Bookmark , comments : Comment , filters : Filter, followers : Friendship , followings : Friendship ]    
     
     boolean enabled = true
-    boolean accountExpired
-    boolean accountLocked
-    boolean passwordExpired
+    boolean accountExpired = false
+    boolean accountLocked = false
+    boolean passwordExpired = false
     
     
 
@@ -34,6 +34,7 @@ class User {
     }
 
     static mapping = {
+        table "account"
         password column: '`password`'      
     }
 
