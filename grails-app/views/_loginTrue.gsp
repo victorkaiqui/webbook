@@ -4,7 +4,7 @@
     <div class="span3">
 
       <div class="thumbnail"  style="background: gainsboro">
-        <title> Webbook - <sec:loggedInUserInfo field="username"/></title>
+        <title> Webbook · <sec:loggedInUserInfo field="username"/></title>
 
         <div class="row-fluid" style="text-align: center">
           <avatar:gravatar email="${user.email}" alt="${user.username}"  cssClass="img-circle" size="32" defaultGravatarUrl="mm" />
@@ -66,8 +66,11 @@
 
       <br>
       <div class="thumbnail">
-
-
+        <ul class="nav nav-tabs nav-stacked">
+        <g:each in="${tags}" status="i" var="tag">
+          <li>${tag}</li>
+        </g:each>
+        </ul>
       </div>
     </div>
 
@@ -107,7 +110,7 @@
               <h5 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}</h5>
             </g:link>
 
-            <small style="margin-top: 0"><a href="${fieldValue(bean: bookmarkInstance, field: "url")}">${fieldValue(bean: bookmarkInstance, field: "url")}</a></small>        
+            <small style="margin-top: 0"><a href="${fieldValue(bean: bookmarkInstance, field: "urlShorten")}">${fieldValue(bean: bookmarkInstance, field: "urlShorten")}</a></small>        
             <p>${fieldValue(bean: bookmarkInstance, field: "description")}</p>
 
             <div class="acoes" style="display: none">

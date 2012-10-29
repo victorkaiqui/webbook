@@ -12,15 +12,7 @@ class BookmarkController {
               
         def user = springSecurityService.currentUser
         user = User.get(user.id)
-         
-          
-        Bookmark.findByUser(user).each{
-            println "oi"
-            it.tags.each{ tag ->
-                println tag
-            }
-
-        }
+      
         
         [bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user)]
   
@@ -55,6 +47,7 @@ class BookmarkController {
         def user = springSecurityService.currentUser
         
         bookmarkInstance.setUser(user)
+        //        bookmarkInstance.setUrlShorten(bookmarkInstance.getUrl().shorten())
         
         if (!bookmarkInstance.save(flush: true)) {
             render(view: "create", model: [bookmarkInstance: bookmarkInstance])
@@ -140,3 +133,25 @@ class BookmarkController {
         }
     }
 }
+/*
+ *import br.com.webbook.*
+
+
+user = User.findByUsername("victorkaiqui")
+def list = []
+
+user.bookmarks.each{
+it.tags.each{ tag ->
+       
+tag.split(",").each{ i ->
+        
+list << i
+        
+            
+}
+              
+}
+}
+
+println list.groupBy({it})
+ **/

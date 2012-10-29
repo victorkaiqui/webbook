@@ -3,7 +3,7 @@
   <head>
     <meta name="layout" content="main"/>
   <facebookAuth:init />
-  <title> Webbook - <sec:loggedInUserInfo field="username"/></title>
+  <title> Webbook · <sec:loggedInUserInfo field="username"/></title>
 </head>
 <body>
 

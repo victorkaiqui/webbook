@@ -10,13 +10,15 @@ class Bookmark {
     String title
     String url
     String encodeUrl
+    String urlShorten
     String description
-    Set<String> tags
+    Set<String> tags  = [] as Set
     static belongsTo = [user : User]
     boolean visibility
 
     static constraints = {
         url url: true 
+        urlShorten nullable : true
         encodeUrl nullable : true
         title nullable : true        
         description nullable : true
@@ -24,8 +26,12 @@ class Bookmark {
         visibility nullable : true
     }
     
+    static hasMany = [
+        tags:String           
+    ]
     
     def beforeInsert() {
+        
         encodeUrl()
     }
 

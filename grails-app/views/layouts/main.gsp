@@ -19,28 +19,27 @@
   <!-- Cabeçalho -->
 
   <header>
-    <div class="navbar navbar-inverse">
-      <div class="navbar-inner">
+    <div class="navbar navbar-inverse"">
+         <div class="navbar-inner">
         <a class="brand" href="${request.contextPath}"><g:message code="my.text.title"/></a>
 
         <sec:ifLoggedIn>
+
+
 
           <form class="navbar-search pull-center">
             <input type="text" class="search-query" placeholder="Search">
           </form>
 
           <div class="btn-group pull-right">
-            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user icon-white"></i><span class="caret"></span></a>
-
+            <a class="btn btn dropdown-toggle" data-toggle="dropdown" href="#"><g:img dir="img" file="glyphicons_019_cogwheel.png" width="20" height="16"/> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown">
 
               <li><g:link controller="user" action="config"><i class="icon-pencil"></i> Edit </g:link></li>
 
-              <li><g:link controller="user" action="delete"><i class="icon-trash"></i>Delete</g:link></li>
-
               <li class="divider"></li>
 
-              <li><i class="i"></i><g:link controller="logout" >Sair</g:link></li>
+              <li><i class="i"></i><g:link controller="logout" ><i class="icon-off"></i> Sair </g:link></li>
 
             </ul>
           </div>
