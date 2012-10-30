@@ -15,4 +15,13 @@ class UserService {
             userFollowed.addToFollowers(friendship).save()
         }
     }
+    
+    def unfollow(User userFollower, User userFollowed){
+        if(userFollower != userFollowed ){
+          
+            def f = Friendship.findByFollowerAndFollowed(userFollower,userFollowed)
+            f.delete()
+            
+        }        
+    }
 }

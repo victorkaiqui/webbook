@@ -7,8 +7,10 @@
         <title> Webbook · <sec:loggedInUserInfo field="username"/></title>
 
         <div class="row-fluid" style="text-align: center">
-          <avatar:gravatar email="${user.email}" alt="${user.username}"  cssClass="img-circle" size="32" defaultGravatarUrl="mm" />
-          <h4>${user.username}</h4>
+          <a href="${request.contextPath}/${user.username}">
+            <avatar:gravatar email="${user.email}" alt="${user.username}"  cssClass="img-circle" size="32" defaultGravatarUrl="mm" />
+            <h4>${user.username}</h4>
+          </a>
         </div>
         <hr>
 
@@ -66,10 +68,10 @@
 
       <br>
       <div class="thumbnail">
-        <ul class="nav nav-tabs nav-stacked">
-        <g:each in="${tags}" status="i" var="tag">
-          <li>${tag}</li>
-        </g:each>
+        <ul class="unstyled">
+          <g:each in="${tags}" status="i" var="tag">
+            <li>${tag}</li>
+          </g:each>
         </ul>
       </div>
     </div>
@@ -87,10 +89,10 @@
             <avatar:gravatar email="${bookmarkInstance.user.email}" alt="${bookmarkInstance.user.username}"  cssClass="img-rounded" size="42" defaultGravatarUrl="mm" />
           </div>
 
-          <div class="thumbnail span11">
+          <div class="thumbnail span11" id="dispose">
 
             <div class="acoes" style="display: none; position: relative;">      
-
+<!--             <g:formatDate format="dd/MM/yyyy HH:mm" date="${bookmarkInstance.dateCreated}"/>-->
               <g:if test="${user.id == bookmarkInstance.user.id}">   
 
                 <g:form controller="bookmark">
@@ -103,23 +105,33 @@
             </div>  
 
             <a href="${request.contextPath}/${bookmarkInstance.user.username}">
-              <h4 style="margin-top: 0">${bookmarkInstance.user.username}</h4>
+              <h5 style="margin-top: 0">${bookmarkInstance.user.username}</h5>
             </a>
 
             <g:link controller="bookmark" action="show" id="${bookmarkInstance.id}">
-              <h5 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}</h5>
+              <h6 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}</h6>
             </g:link>
 
             <small style="margin-top: 0"><a href="${fieldValue(bean: bookmarkInstance, field: "urlShorten")}">${fieldValue(bean: bookmarkInstance, field: "urlShorten")}</a></small>        
             <p>${fieldValue(bean: bookmarkInstance, field: "description")}</p>
 
-            <div class="acoes" style="display: none">
-
-              <a href="#" class="btn btn-mini btn-primary">Action</a>             
-
+            <div class="acoes" style="display: none;">
+              <div id="target">
+                <a href="#" class="btn btn-mini btn-primary">Action</a>  
+              </div>
+              <br>
+              
+              <div id="comment" style="display: none;">
+                <g:form url="[action:'save', controller:'comment']">
+                  <g:render template="/comment/form"/>
+                  <g:hiddenField name="id" value="${bookmarkInstance?.id}" />
+                  <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                </g:form>
+              </div>
+              
             </div> 
-          </div>
-          
+          </div> 
+
         </div>
         <hr>
       </g:each>
@@ -148,12 +160,10 @@
       'placeholderColor' :'#B8B8B8'
     });
 
-    $('#campo').focus(function() { 
-      $("#acoes").show();
-    }); 
-
-    $('#campo').blur( function() {   
-      $("#acoes").hide();
+    $("#target").click(function() {
+      $("#comment").animate({
+        height: 'show'
+      })
     });
 
     $('#openBookmarkModal').click(function() {

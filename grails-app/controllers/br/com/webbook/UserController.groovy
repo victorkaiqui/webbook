@@ -14,9 +14,25 @@ class UserController {
         def user = User.findByUsername(params.username)
         def userInstance = springSecurityService.currentUser
         userInstance = User.get(userInstance.id)
+        
+          def timelineList = []
+          
+            timelineList.addAll(user.bookmarks)
+            timelineList.sort{a , b -> b.dateCreated <=> a.dateCreated}        
+             
+            def listTags = []
+            user.bookmarks.each{
+                it.tags.each{ tag ->       
+                    tag.split(",").each{ i ->        
+                        listTags << i     
+                    }              
+                }
+            }
+           
+            def tagsList = listTags.groupBy({it})
 
         def isFollowing = userInstance.isFollowing(user)
-        render (view : "profile", model: [user : user , userInstance : userInstance, isFollowing: isFollowing , bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user)])
+        render (view : "profile", model: [user : user , userInstance : userInstance, isFollowing: isFollowing , bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user), tagsList: tagsList, timelineList : timelineList])
         
     }    
        
@@ -24,13 +40,17 @@ class UserController {
               
         def userFollowed = User.findByUsername(params.username)
         def userFollower = springSecurityService.currentUser        
+        def friendship = Friendship.findByFollowerAndFollowed(userFollower,userFollowed)
         
-        userService.follow(userFollower, userFollowed)
-
+        if(!friendship){
+            userService.follow(userFollower, userFollowed)
+        }else{
+            userService.unfollow(userFollower, userFollowed)
+        }
         redirect(action:"profile", params: [username: userFollowed.username])
              
     }
-  
+       
 
     
     def create() {

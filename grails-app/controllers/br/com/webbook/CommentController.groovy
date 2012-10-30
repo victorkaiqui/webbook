@@ -3,7 +3,7 @@ package br.com.webbook
 import org.springframework.dao.DataIntegrityViolationException
 
 class CommentController {
-
+    def springSecurityService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -11,7 +11,9 @@ class CommentController {
     }
 
     def list(Integer max) {
+        
         params.max = Math.min(max ?: 10, 100)
+        
         [commentInstanceList: Comment.list(params), commentInstanceTotal: Comment.count()]
     }
 
@@ -21,13 +23,22 @@ class CommentController {
 
     def save() {
         def commentInstance = new Comment(params)
+        
+        def user = springSecurityService.currentUser
+        user = User.get(user.id)
+        
+        def bookmark = Bookmark.get(params.id)
+        
+        commentInstance.setUser(user)
+        commentInstance.setBookmark(bookmark)
+        
         if (!commentInstance.save(flush: true)) {
             render(view: "create", model: [commentInstance: commentInstance])
             return
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'comment.label', default: 'Comment'), commentInstance.id])
-        redirect(action: "show", id: commentInstance.id)
+        redirect(uri:"/", id: commentInstance.id)
     }
 
     def show(Long id) {
@@ -63,7 +74,7 @@ class CommentController {
         if (version != null) {
             if (commentInstance.version > version) {
                 commentInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'comment.label', default: 'Comment')] as Object[],
+                    [message(code: 'comment.label', default: 'Comment')] as Object[],
                           "Another user has updated this Comment while you were editing")
                 render(view: "edit", model: [commentInstance: commentInstance])
                 return

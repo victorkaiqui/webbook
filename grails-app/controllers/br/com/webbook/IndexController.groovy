@@ -15,28 +15,20 @@ class IndexController {
                 timelineList.addAll(it.followed.bookmarks)  
             }
             timelineList.addAll(user.bookmarks)
-            timelineList.sort{a , b -> b.dateCreated <=> a.dateCreated}
-        
+            timelineList.sort{a , b -> b.dateCreated <=> a.dateCreated}        
              
-            def list = []
-
+            def listTags = []
             user.bookmarks.each{
-                it.tags.each{ tag ->
-       
-                    tag.split(",").each{ i ->
-        
-                        list << i
-        
-            
-                    }
-              
+                it.tags.each{ tag ->       
+                    tag.split(",").each{ i ->        
+                        listTags << i     
+                    }              
                 }
             }
-
-            println list.groupBy({it})
+           
+            def tagsList = listTags.groupBy({it})
             
-            
-            render(view:"/index", model: [user : user , bookmarkInstanceTotal: Bookmark.countByUser(user), timelineList: timelineList, tags:list.groupBy({it})] )
+            render(view:"/index", model: [user : user , bookmarkInstanceTotal: Bookmark.countByUser(user), timelineList: timelineList, tags: tagsList])
         }
         else {
             render(view:"/index" )
