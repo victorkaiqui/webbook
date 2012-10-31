@@ -26,10 +26,7 @@ class Bookmark {
         visibility nullable : true
     }
     
-    static hasMany = [
-        tags:String           
-    ]
-    
+    static hasMany = [tags:String, comments : Comment]  
     def beforeInsert() {
         
         encodeUrl()

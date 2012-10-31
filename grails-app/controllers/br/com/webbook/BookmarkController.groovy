@@ -19,9 +19,7 @@ class BookmarkController {
         
     }
 
-    def timeline(){
-        
-        
+    def timeline(){       
         
         def user = springSecurityService.currentUser
         user = User.get(user.id)
@@ -58,9 +56,22 @@ class BookmarkController {
         redirect(uri:"/", id: bookmarkInstance.id)
     }
 
-    def preview(){
-        render bookmarkService.webScrap(param.url)
+    def favoritar(){
         
+        def bookmark = new Bookmark() 
+        def bookmarkTeste = Bookmark.get(params.id)
+        def user = springSecurityService.currentUser       
+        
+        bookmark.setUser(user)
+        bookmark.setTitle(bookmarkTeste.title)
+        
+        bookmark.save()
+
+        redirect(uri:"/", id: bookmark.id)
+        
+    }
+    def preview(){
+        render bookmarkService.webScrap(param.url)        
     }
     
     def show(Long id) {
