@@ -1,6 +1,7 @@
 package br.com.webbook
+import org.grails.taggable.*
 
-class Bookmark {
+class Bookmark implements Taggable {
    
     transient springSecurityService
     
@@ -12,7 +13,6 @@ class Bookmark {
     String encodeUrl
     String urlShorten
     String description
-    Set<String> tags  = [] as Set
     static belongsTo = [user : User]
     boolean visibility
 
@@ -21,12 +21,12 @@ class Bookmark {
         urlShorten nullable : true
         encodeUrl nullable : true
         title nullable : true        
-        description nullable : true
-        tags nullable : true
+        description nullable : true        
         visibility nullable : true
     }
     
-    static hasMany = [tags:String, comments : Comment]  
+    static hasMany = [comments : Comment]  
+    
     def beforeInsert() {
         
         encodeUrl()

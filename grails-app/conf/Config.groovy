@@ -111,3 +111,6 @@ grails.plugins.springsecurity.interceptUrlMap = [
     '/user/*':              ['IS_AUTHENTICATED_REMEMBERED'],
     '/bookmark/*':          ['IS_AUTHENTICATED_REMEMBERED']    
 ]
+
+
+grails.taggable.preserve.case = true

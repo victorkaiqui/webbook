@@ -1,6 +1,7 @@
 package br.com.webbook
 
 import org.springframework.dao.DataIntegrityViolationException
+import grails.converters.*
 
 class BookmarkController {
     def springSecurityService
@@ -44,14 +45,21 @@ class BookmarkController {
         def bookmarkInstance = new Bookmark(params)
         def user = springSecurityService.currentUser
         
+     
         bookmarkInstance.setUser(user)
         //        bookmarkInstance.setUrlShorten(bookmarkInstance.getUrl().shorten())
         
+        def tags =params.tags
+       
+        println tags
+        
         if (!bookmarkInstance.save(flush: true)) {
+             bookmarkInstance.parseTags(tags)
             render(view: "create", model: [bookmarkInstance: bookmarkInstance])
             return
         }
-
+        
+         bookmarkInstance.parseTags(tags)
         flash.message = message(code: 'default.created.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), bookmarkInstance.id])
         redirect(uri:"/", id: bookmarkInstance.id)
     }
@@ -61,17 +69,16 @@ class BookmarkController {
         def bookmark = new Bookmark() 
         def bookmarkTeste = Bookmark.get(params.id)
         def user = springSecurityService.currentUser       
+   
+        bookmark.title = bookmarkTeste.title
+        bookmark.url =  bookmarkTeste.url
+        bookmark.description =  bookmarkTeste.description    
+        bookmark.tags =  bookmarkTeste.tags 
         
-        bookmark.setUser(user)
-        bookmark.setTitle(bookmarkTeste.title)
-        
-        bookmark.save()
-
-        redirect(uri:"/", id: bookmark.id)
-        
+        render bookmark as JSON
     }
     def preview(){
-        render bookmarkService.webScrap(param.url)        
+        render bookmarkService.webScrap(params.url)  as JSON  
     }
     
     def show(Long id) {
@@ -144,25 +151,3 @@ class BookmarkController {
         }
     }
 }
-/*
- *import br.com.webbook.*
-
-
-user = User.findByUsername("victorkaiqui")
-def list = []
-
-user.bookmarks.each{
-it.tags.each{ tag ->
-       
-tag.split(",").each{ i ->
-        
-list << i
-        
-            
-}
-              
-}
-}
-
-println list.groupBy({it})
- **/
