@@ -15,26 +15,38 @@ class UserController {
         def userInstance = springSecurityService.currentUser
         userInstance = User.get(userInstance.id)
         
-          def timelineList = []
+        def timelineList = []
           
-            timelineList.addAll(user.bookmarks)
-            timelineList.sort{a , b -> b.dateCreated <=> a.dateCreated}        
+        timelineList.addAll(user.bookmarks)
+        timelineList.sort{a , b -> b.dateCreated <=> a.dateCreated}        
              
-            def listTags = []
-            user.bookmarks.each{
-                it.tags.each{ tag ->       
-                    tag.split(",").each{ i ->        
-                        listTags << i     
-                    }              
-                }
+        def listTags = []
+        user.bookmarks.each{
+            it.tags.each{ tag ->       
+                tag.split(",").each{ i ->        
+                    listTags << i     
+                }              
             }
+        }
            
-            def tagsList = listTags.groupBy({it})
+        def tagsList = listTags.groupBy({it})
 
         def isFollowing = userInstance.isFollowing(user)
         render (view : "profile", model: [user : user , userInstance : userInstance, isFollowing: isFollowing , bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user), tagsList: tagsList, timelineList : timelineList])
         
     }    
+    
+    def followings(){
+        
+        def user = springSecurityService.currentUser
+        
+     
+            
+        def followings = user.followings
+        
+        render(view: "followings", model: [user: user, followings : followings])
+    }
+
        
     def follow(){
               

@@ -18,11 +18,13 @@
           <div class="thumbnail span4">${bookmarkInstanceTotal} 
             <div><small>favoritos</small></div>
           </div>
-
-          <div class="thumbnail span4">${user.followings.size()} 
-            <div><small>seguindo</small></div>
-          </div>
-
+          <g:link url="[action:'followings',controller:'user']" id="${user.id}">
+            <a href="${request.contextPath}/followings">
+              <div class="thumbnail span4">${user.followings.size()} 
+                <div><small>seguindo</small></div>
+              </div>
+            </a>
+          </g:link>
           <div class="thumbnail span4">${user.followers.size()} 
             <div><small>seguidores</small></div>
           </div>
@@ -76,7 +78,7 @@
       </div>
     </div>
     <!------------------------------------------------------------------------>
-    <div class="thumbnail span8">
+    <div class="thumbnail span8"  style="background-color: whitesmoke;">
       <h4>Favoritos:</h4>
       <hr> 
 
@@ -92,17 +94,16 @@
 
             <div class="span11" id="dispose">
 
-
               <a href="${request.contextPath}/${bookmarkInstance.user.username}">
                 <font color="black"><h5 style="margin-top: 0; margin-bottom: 0px;">${bookmarkInstance.user.username}</h5></font>
               </a>
 
               <a href="${request.contextPath}/bookmark/update?id=${bookmarkInstance?.id}"  onclick="return false;" class="btn btn-link openBookmark" style="margin-bottom: 0px; margin-top: 0px; padding: 0px;">
-                <font color="black"> <h6 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}</h6></font>
+                <font color="black"><h6 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}</h6></font>
               </a><br>
 
 
-              <small style="margin-top: 0"><a href="${fieldValue(bean: bookmarkInstance, field: "urlShorten")}">${fieldValue(bean: bookmarkInstance, field: "urlShorten")}</a></small>        
+              <small><a href="${fieldValue(bean: bookmarkInstance, field: "urlShorten")}">${fieldValue(bean: bookmarkInstance, field: "urlShorten")}</a></small>        
               <p>${fieldValue(bean: bookmarkInstance, field: "description")}</p>
 
               <div class="row-fluid">
@@ -133,7 +134,7 @@
                       <div class="modal-footer">                  
                         <g:hiddenField name="id" value="${bookmarkInstance?.id}" />
                         <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                        <a href="#" class="btn btn-large" data-dismiss="modal" >Close</a>  
+                        <a href="#" class="btn btn-large" data-dismiss="modal" >Fechar</a>  
                       </div>
 
                     </fieldset>
@@ -142,7 +143,7 @@
                 </div>  
               </div>
 
-              <i class="icon-edit"></i><a href="${request.contextPath}/comment/create?id=${bookmarkInstance?.id}" onclick="return false;" data-toggle="modal" class="btn btn-link openComment">Comment</a>
+              <i class="icon-edit"></i><a href="${request.contextPath}/comment/create?id=${bookmarkInstance?.id}" onclick="return false;" data-toggle="modal" class="btn btn-link openComment">Comentários</a>
 
             </div>
 
@@ -167,6 +168,7 @@
 
                 </g:if>
               </div>
+
             </div> 
           </div> 
 
@@ -202,9 +204,10 @@ $(document).ready(function(){
     var url =  $("#bookmarkUrl").val();
 
     $.getJSON('${request.contextPath}/bookmark/preview', {url: url} , function(data){
-      $("#url").val(data.url);      
+      $("#url").val(data.url);     
+      $("#title").val(data.title); 
     }); 
-
+    
     $('#bookmarkModal').modal();
 
   });
@@ -216,8 +219,8 @@ $(document).ready(function(){
       $("#title").val(data.title);
       $("#url").val(data.url);
       $("#description").val(data.description);
-      $("#tags").val(data.tags);
-      $("#tags").importTags(data.tags.toString());
+//      $("#tags").val(data.tags);
+//      $("#tags").importTags(data.tags.toString());
 
       $('#bookmarkModal').modal();
     });
@@ -225,13 +228,13 @@ $(document).ready(function(){
 
   $('.openBookmark').on('click', loadData);
 
-  function createComment( {
-    var id = $(this).attr(")href");
+  function createComment() {
+var id = $(this).attr("href");
 
-     $('#commentModal').modal();
-  }
+$('#commentModal').modal();
+}
 
 
-  $('.openComment').on('click', createComment);
+$('.openComment').on('click', createComment);
 })
 </script>

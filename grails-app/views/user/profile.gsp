@@ -69,7 +69,7 @@
 
         <g:each in="${timelineList}" status="i" var="bookmarkInstance">
 
-          <div class="favorito">
+          <div class="favorito thumbnail">
 
             <div class="row-fluid">
 

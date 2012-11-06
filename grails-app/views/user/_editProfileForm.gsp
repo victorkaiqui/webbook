@@ -20,6 +20,15 @@
 
 <div class="control-group">
   <div  class="control-label">
+    Avatar:
+  </div>
+  <div class="control-label">
+    <a href="https://pt.gravatar.com/">Altere seu avatar</a>
+  </div>
+</div>
+
+<div class="control-group">
+  <div  class="control-label">
     <g:message code="user.birthyday.label"/> 
   </div>
   <div class="controls">   

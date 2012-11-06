@@ -1,5 +1,5 @@
 package br.com.webbook
-import org.ccil.cowan.tagsoup.Parser
+import org.ccil.cowan.tagsoup.*
 
 class BookmarkService {
 
@@ -17,7 +17,8 @@ class BookmarkService {
         def slurper = new XmlSlurper(new Parser())
 
         url.withReader { reader -> 
-            html = slurper.parse(reader) 
+            
+            def html = slurper.parse(reader) 
             html."**".findAll { it.name() == "title" }.each { 
                 def title = it.text() 
                 println title

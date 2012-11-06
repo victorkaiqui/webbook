@@ -35,7 +35,7 @@
             <a class="btn btn dropdown-toggle" data-toggle="dropdown" href="#"><g:img dir="img" file="glyphicons_019_cogwheel.png" width="20" height="16"/> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown">
 
-              <li><g:link controller="user" action="config"><i class="icon-pencil"></i> Edit </g:link></li>
+              <li><g:link controller="user" action="config"><i class="icon-pencil"></i> Configuração </g:link></li>
 
               <li class="divider"></li>
 

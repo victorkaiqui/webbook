@@ -20,22 +20,6 @@ class BookmarkController {
         
     }
 
-    def timeline(){       
-        
-        def user = springSecurityService.currentUser
-        user = User.get(user.id)
-        
-        def timelineList = []
-        user.followings.each {
-            timelineList.addAll(it.followed.bookmarks)  
-        }
-        timelineList.addAll(user.bookmarks)
-        timelineList.sort{it.dateCreated}
-        
-    
-        render(view:"/index", model: [user : user , bookmarkInstanceTotal: Bookmark.countByUser(user), timelineList: timelineList] )
-    }
-
     def create() {
         [bookmarkInstance: new Bookmark(params)]
     }
@@ -49,17 +33,15 @@ class BookmarkController {
         bookmarkInstance.setUser(user)
         bookmarkInstance.setUrlShorten(bookmarkInstance.getUrl().shorten())
         
-        def tags =params.tags
+        def tags = params.tags
        
-        println tags
-        
         if (!bookmarkInstance.save(flush: true)) {
-            bookmarkInstance.parseTags(tags)
+           
             render(view: "create", model: [bookmarkInstance: bookmarkInstance])
             return
         }
         
-        bookmarkInstance.parseTags(tags)
+        bookmarkInstance.parseTags(tags).save()
         flash.message = message(code: 'default.created.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), bookmarkInstance.id])
         redirect(uri:"/", id: bookmarkInstance.id)
     }
@@ -73,7 +55,7 @@ class BookmarkController {
         bookmark.title = bookmarkTeste.title
         bookmark.url =  bookmarkTeste.url
         bookmark.description =  bookmarkTeste.description    
-        bookmark.tags =  bookmarkTeste.tags 
+        
         
         render bookmark as JSON
     }
