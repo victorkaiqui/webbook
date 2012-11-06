@@ -19,7 +19,7 @@
             <div><small>favoritos</small></div>
           </div>
           <g:link url="[action:'followings',controller:'user']" id="${user.id}">
-            <a href="${request.contextPath}/followings">
+            <a href="${request.contextPath}/user/followings">
               <div class="thumbnail span4">${user.followings.size()} 
                 <div><small>seguindo</small></div>
               </div>
@@ -116,7 +116,7 @@
           </div>  
 
           <div class="row-fluid">
-            <div class="span8">              
+            <div class="span6">              
 
               <div id="commentModal" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
                 <div class="modal-header">  
@@ -124,48 +124,36 @@
                   <h3>Adicione seu novo comentario</h3>  
                 </div>  
 
-                <div class="modal-body">  
+                <div class="modal-body"> 
 
-                  <g:form url="[action:'save', controller:'comment']">
-                    <fieldset>
-
-                      <g:render template="/comment/form"/>
-
-                      <div class="modal-footer">                  
-                        <g:hiddenField name="id" value="${bookmarkInstance?.id}" />
-                        <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                        <a href="#" class="btn btn-large" data-dismiss="modal" >Fechar</a>  
-                      </div>
-
-                    </fieldset>
-                  </g:form>
-
-                </div>  
+                </div> 
+                <div class="modal-footer">
+                  <a href="#" class="btn btn-large" data-dismiss="modal" >Fechar</a>  
+                </div>
               </div>
 
-              <i class="icon-edit"></i><a href="${request.contextPath}/comment/create?id=${bookmarkInstance?.id}" onclick="return false;" data-toggle="modal" class="btn btn-link openComment">Comentários</a>
+              <i class="icon-edit"></i><a href="${request.contextPath}/comment/list?id=${bookmarkInstance?.id}" onclick="return false;" data-toggle="modal" class="btn btn-link openComment">Comentários</a>
 
             </div>
 
             <div class="acoes" style="display: none;">
 
-              <div class="span2">
+              <div class="span3">
                 <g:if test="${user.username != bookmarkInstance.user.username}">
 
                   <i class="icon-ok"></i><a href="${request.contextPath}/bookmark/favoritar?id=${bookmarkInstance?.id}"  onclick="return false;" class="btn btn-link openBookmark">Favoritar</a>
 
                 </g:if>
               </div>
-              <div class="span2">
-                <g:if test="${user.id == bookmarkInstance.user.id}">   
 
+              <div class="span3">
+                <g:if test="${user.id == bookmarkInstance.user.id}">  
                   <g:form controller="bookmark">
 
                     <g:hiddenField name="id" value="${bookmarkInstance?.id}" />
                     <i class="icon-trash"></i><g:actionSubmit action="delete" value="Excluir" class="btn btn-link"  onclick="return confirm('Você tem certeza?');" />
 
                   </g:form>
-
                 </g:if>
               </div>
 
@@ -219,8 +207,8 @@ $(document).ready(function(){
       $("#title").val(data.title);
       $("#url").val(data.url);
       $("#description").val(data.description);
-//      $("#tags").val(data.tags);
-//      $("#tags").importTags(data.tags.toString());
+      $("#tags").val(data.tags);
+      $("#tags").importTags(data.tags.toString());
 
       $('#bookmarkModal').modal();
     });
@@ -229,8 +217,9 @@ $(document).ready(function(){
   $('.openBookmark').on('click', loadData);
 
   function createComment() {
-var id = $(this).attr("href");
+var url = $(this).attr("href");
 
+$('#commentModal').load(url);
 $('#commentModal').modal();
 }
 

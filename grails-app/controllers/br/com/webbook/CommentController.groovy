@@ -10,11 +10,14 @@ class CommentController {
         redirect(action: "list", params: params)
     }
 
-    def list(Integer max) {
+    def list() {
         
-        params.max = Math.min(max ?: 10, 100)
+        def bookmark = Bookmark.get(params.id)
         
-        [commentInstanceList: Comment.list(params), commentInstanceTotal: Comment.count()]
+        def comments = bookmark.comments      
+        
+        
+        render(view: "list", model: [commentInstance: new Comment() , comments: comments, bookmarkId: bookmark.id])
     }
 
     def create() {

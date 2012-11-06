@@ -25,11 +25,11 @@
 
         <sec:ifLoggedIn>
 
+          
+          <g:form url="[action:'search', controller:'search']" class="navbar-search pull-center">
+            <input type="text" class="search-query" placeholder="Search" name="query">
+          </g:form>
 
-
-          <form class="navbar-search pull-center">
-            <input type="text" class="search-query" placeholder="Search">
-          </form>
 
           <div class="btn-group pull-right">
             <a class="btn btn dropdown-toggle" data-toggle="dropdown" href="#"><g:img dir="img" file="glyphicons_019_cogwheel.png" width="20" height="16"/> <span class="caret"></span></a>

@@ -22,6 +22,12 @@ class User {
     boolean accountLocked = false
     boolean passwordExpired = false   
 
+    static search = {
+        name index: 'tokenized'
+        lastname index: 'tokenized'
+        username index: 'tokenized'
+    }
+    
     static constraints = {
         name blank: false , size: 3..15  , nullable : true
         lastName blank: false , size: 3..15 , nullable : true      

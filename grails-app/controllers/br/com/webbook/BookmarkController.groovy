@@ -19,6 +19,7 @@ class BookmarkController {
   
         
     }
+   
 
     def create() {
         [bookmarkInstance: new Bookmark(params)]
@@ -31,9 +32,9 @@ class BookmarkController {
         
      
         bookmarkInstance.setUser(user)
-        bookmarkInstance.setUrlShorten(bookmarkInstance.getUrl().shorten())
-        
-        def tags = params.tags
+        //        bookmarkInstance.setUrlShorten(bookmarkInstance.getUrl().shorten())
+     
+        bookmarkInstance.pesquisa = params.tags
        
         if (!bookmarkInstance.save(flush: true)) {
            
@@ -41,7 +42,8 @@ class BookmarkController {
             return
         }
         
-        bookmarkInstance.parseTags(tags).save()
+        bookmarkInstance.parseTags(params.tags)
+        
         flash.message = message(code: 'default.created.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), bookmarkInstance.id])
         redirect(uri:"/", id: bookmarkInstance.id)
     }

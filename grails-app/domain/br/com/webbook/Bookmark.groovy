@@ -13,9 +13,16 @@ class Bookmark implements Taggable {
     String encodeUrl
     String urlShorten
     String description
+    String pesquisa
     static belongsTo = [user : User]
     boolean visibility
 
+    static search = {
+        title index: 'tokenized'
+        description  index: 'tokenized'
+        pesquisa  index: 'tokenized'
+        
+    }
     static constraints = {
         url url: true 
         urlShorten nullable : true
