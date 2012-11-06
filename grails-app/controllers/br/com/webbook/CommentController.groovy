@@ -16,6 +16,7 @@ class CommentController {
         
         def comments = bookmark.comments      
         
+        comments.sort{a , b -> b.dateCreated <=> a.dateCreated} 
         
         render(view: "list", model: [commentInstance: new Comment() , comments: comments, bookmarkId: bookmark.id])
     }

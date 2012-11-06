@@ -118,7 +118,7 @@
           <div class="row-fluid">
             <div class="span6">              
 
-              <div id="commentModal" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
+              <div id="commentModal" class="modal hide fade in">  
                 <div class="modal-header">  
                   <a class="close" data-dismiss="modal">×</a>  
                   <h3>Adicione seu novo comentario</h3>  
@@ -128,7 +128,7 @@
 
                 </div> 
                 <div class="modal-footer">
-                  <a href="#" class="btn btn-large" data-dismiss="modal" >Fechar</a>  
+                 
                 </div>
               </div>
 
@@ -219,7 +219,7 @@ $(document).ready(function(){
   function createComment() {
 var url = $(this).attr("href");
 
-$('#commentModal').load(url);
+$('#commentModal .modal-body').load(url);
 $('#commentModal').modal();
 }
 
