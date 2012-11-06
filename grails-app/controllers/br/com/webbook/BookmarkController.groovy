@@ -47,19 +47,19 @@ class BookmarkController {
         
      
         bookmarkInstance.setUser(user)
-        //        bookmarkInstance.setUrlShorten(bookmarkInstance.getUrl().shorten())
+        bookmarkInstance.setUrlShorten(bookmarkInstance.getUrl().shorten())
         
         def tags =params.tags
        
         println tags
         
         if (!bookmarkInstance.save(flush: true)) {
-             bookmarkInstance.parseTags(tags)
+            bookmarkInstance.parseTags(tags)
             render(view: "create", model: [bookmarkInstance: bookmarkInstance])
             return
         }
         
-         bookmarkInstance.parseTags(tags)
+        bookmarkInstance.parseTags(tags)
         flash.message = message(code: 'default.created.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), bookmarkInstance.id])
         redirect(uri:"/", id: bookmarkInstance.id)
     }
@@ -77,8 +77,9 @@ class BookmarkController {
         
         render bookmark as JSON
     }
+    
     def preview(){
-        render bookmarkService.webScrap(params.url)  as JSON  
+        render bookmarkService.webScrap(params.url) as JSON  
     }
     
     def show(Long id) {

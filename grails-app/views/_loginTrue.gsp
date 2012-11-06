@@ -8,7 +8,7 @@
 
         <div class="row-fluid" style="text-align: center">
           <a href="${request.contextPath}/${user.username}">
-            <avatar:gravatar email="${user.email}" alt="${user.username}"  cssClass="img-circle" size="32" defaultGravatarUrl="mm" />
+            <avatar:gravatar email="${user.email}" alt="${user.username}"  cssClass="img-circle" size="52" defaultGravatarUrl="mm" />
             <h4>${user.username}</h4>
           </a>
         </div>
@@ -69,9 +69,6 @@
       <br>
       <div class="thumbnail">
         <ul class="unstyled">
-<!--          <g:each in="${tags}" status="i" var="tag">
-            <li>${tag}</li>
-          </g:each>-->
           <g:each in="${tags}">
             <li> <span class="label">#${it}</span></li>
           </g:each>
@@ -97,12 +94,12 @@
 
 
               <a href="${request.contextPath}/${bookmarkInstance.user.username}">
-                <h5 style="margin-top: 0">${bookmarkInstance.user.username}</h5>
+                <font color="black"><h5 style="margin-top: 0; margin-bottom: 0px;">${bookmarkInstance.user.username}</h5></font>
               </a>
 
-<!--              <a href="${request.contextPath}/bookmark/update?id=${bookmarkInstance?.id}"  onclick="return false;" class="btn btn-link openBookmark">
-                <h6 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}</h6>
-              </a>-->
+              <a href="${request.contextPath}/bookmark/update?id=${bookmarkInstance?.id}"  onclick="return false;" class="btn btn-link openBookmark" style="margin-bottom: 0px; margin-top: 0px; padding: 0px;">
+                <font color="black"> <h6 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}</h6></font>
+              </a><br>
 
 
               <small style="margin-top: 0"><a href="${fieldValue(bean: bookmarkInstance, field: "urlShorten")}">${fieldValue(bean: bookmarkInstance, field: "urlShorten")}</a></small>        
@@ -118,24 +115,46 @@
           </div>  
 
           <div class="row-fluid">
-            <div class="span8">
-              <g:form controller="bookmark">
+            <div class="span8">              
 
-                <i class="icon-edit"></i><g:actionSubmit action="delete" value="Comentar" class="btn btn-link"  onclick="return confirm('Você tem certeza?');" />
+              <div id="commentModal" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
+                <div class="modal-header">  
+                  <a class="close" data-dismiss="modal">×</a>  
+                  <h3>Adicione seu novo comentario</h3>  
+                </div>  
 
-              </g:form>
+                <div class="modal-body">  
+
+                  <g:form url="[action:'save', controller:'comment']">
+                    <fieldset>
+
+                      <g:render template="/comment/form"/>
+
+                      <div class="modal-footer">                  
+                        <g:hiddenField name="id" value="${bookmarkInstance?.id}" />
+                        <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                        <a href="#" class="btn btn-large" data-dismiss="modal" >Close</a>  
+                      </div>
+
+                    </fieldset>
+                  </g:form>
+
+                </div>  
+              </div>
+
+              <i class="icon-edit"></i><a href="${request.contextPath}/comment/create?id=${bookmarkInstance?.id}" onclick="return false;" data-toggle="modal" class="btn btn-link openComment">Comment</a>
+
             </div>
 
             <div class="acoes" style="display: none;">
 
-              <g:if test="${user.username != bookmarkInstance.user.username}">
-                <div class="span2">                
+              <div class="span2">
+                <g:if test="${user.username != bookmarkInstance.user.username}">
 
                   <i class="icon-ok"></i><a href="${request.contextPath}/bookmark/favoritar?id=${bookmarkInstance?.id}"  onclick="return false;" class="btn btn-link openBookmark">Favoritar</a>
 
-                </div>
-              </g:if>
-
+                </g:if>
+              </div>
               <div class="span2">
                 <g:if test="${user.id == bookmarkInstance.user.id}">   
 
@@ -151,21 +170,14 @@
             </div> 
           </div> 
 
-          <div class="comment" style="display: none;">
-            <g:form url="[action:'save', controller:'comment']">
-              <g:render template="/comment/form"/>
-              <g:hiddenField name="id" value="${bookmarkInstance?.id}" />
-              <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-            </g:form>
-          </div>
-
         </div>
 
-        <hr>
+        <hr style="margin-top: 0px;">
       </g:each>
     </div>
   </div>
 </div>
+
 
 
 <script>
@@ -200,18 +212,26 @@ $(document).ready(function(){
   function loadData(){
     var url = $(this).attr("href");
     $.get(url, {}, function (data){
-$("#id").val(data.id);
-$("#title").val(data.title);
-$("#url").val(data.url);
-$("#description").val(data.description);
-$("#tags").val(data.tags);
-$("#tags").importTags(data.tags.toString());
+      $("#id").val(data.id);
+      $("#title").val(data.title);
+      $("#url").val(data.url);
+      $("#description").val(data.description);
+      $("#tags").val(data.tags);
+      $("#tags").importTags(data.tags.toString());
 
-$('#bookmarkModal').modal();
-});
-}
+      $('#bookmarkModal').modal();
+    });
+  }
 
-$('.openBookmark').on('click', loadData);
+  $('.openBookmark').on('click', loadData);
 
+  function createComment( {
+    var id = $(this).attr(")href");
+
+     $('#commentModal').modal();
+  }
+
+
+  $('.openComment').on('click', createComment);
 })
 </script>
