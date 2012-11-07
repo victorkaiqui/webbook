@@ -24,7 +24,7 @@ class User {
 
     static search = {
         name index: 'tokenized'
-        lastname index: 'tokenized'
+        lastName index: 'tokenized'
         username index: 'tokenized'
     }
     

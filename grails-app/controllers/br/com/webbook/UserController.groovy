@@ -37,16 +37,24 @@ class UserController {
     }    
     
     def followings(){
+        def userInstance = springSecurityService.currentUser
+        def user = springSecurityService.currentUser          
+        def followings = user.followings 
         
-        def user = springSecurityService.currentUser
+        followings = followings.followed
         
-     
-            
-        def followings = user.followings
-        
-        render(view: "followings", model: [user: user, followings : followings])
+        render(view: "followings", model: [ userInstance : userInstance, user: user, followings : followings, bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user)])
     }
 
+    def followers() {
+        
+        def user = springSecurityService.currentUser          
+        def followers = user.followers 
+        
+        followers = followers.follower
+        
+        render(view: "followers", model: [ user: user, followers : followers, bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user)])
+    }
        
     def follow(){
               

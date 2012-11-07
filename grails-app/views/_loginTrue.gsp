@@ -15,19 +15,23 @@
         <hr>
 
         <div class="row-fluid">
-          <div class="thumbnail span4">${bookmarkInstanceTotal} 
-            <div><small>favoritos</small></div>
-          </div>
-          <g:link url="[action:'followings',controller:'user']" id="${user.id}">
-            <a href="${request.contextPath}/user/followings">
-              <div class="thumbnail span4">${user.followings.size()} 
-                <div><small>seguindo</small></div>
-              </div>
-            </a>
-          </g:link>
-          <div class="thumbnail span4">${user.followers.size()} 
-            <div><small>seguidores</small></div>
-          </div>
+          <a href="${request.contextPath}/${user.username}">
+            <div class="thumbnail span4">${bookmarkInstanceTotal} 
+              <div><small>favoritos</small></div>
+            </div>
+          </a>
+
+          <a href="${request.contextPath}/user/followings">
+            <div class="thumbnail span4">${user.followings.size()} 
+              <div><small>seguindo</small></div>
+            </div>
+          </a>
+
+          <a href="${request.contextPath}/user/followers">
+            <div class="thumbnail span4">${user.followers.size()} 
+              <div><small>seguidores</small></div>
+            </div>
+          </a>
         </div>
 
         <hr>
@@ -128,7 +132,7 @@
 
                 </div> 
                 <div class="modal-footer">
-                 
+
                 </div>
               </div>
 
