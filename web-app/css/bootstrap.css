@@ -170,7 +170,7 @@ body {
     font-size: 14px;
     line-height: 20px;
     color: #333333;
-    background-image:URL('https://kippt.com/static/img/base-noise.jpeg?141b58b60994');
+    background-image:URL('http://soundready.fm/assets/line-pattern.png');
 }
 
 a {
@@ -4804,7 +4804,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .modal-body {
-    max-height: 400px;
+   
     padding: 15px;
     overflow-y: auto;
 }

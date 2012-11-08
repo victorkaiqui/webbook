@@ -17,7 +17,7 @@
         <div class="span6">
 
           <h2>Usuário</h2>
-          <div class="span12 thumbnail">
+          <div class="span12 thumbnail"  style="background-image:URL('https://kippt.com/static/img/base-noise.jpeg?141b58b60994');">
 
             <g:each in="${users}" var="user">
               <div class="span2">
@@ -25,7 +25,7 @@
               </div>
               <div class="span10">
                 <a href="${request.contextPath}/${user.username}">
-                  <h2>@${user.username}</h2><br>
+                  <h2>${user.username}</h2><br>
                 </a>
               </div>
             </g:each>
@@ -36,16 +36,20 @@
 
         <div class="span6">
           <h2>Tags</h2>
-          <div class="span12 thumbnail">
+          <div class="span12 thumbnail"  style="background-image:URL('https://kippt.com/static/img/base-noise.jpeg?141b58b60994');">
 
             <g:each in="${bookmarks}" var="bookmark">
-              <div class="span12">
+              <g:if test="${!bookmark.visibility}">
+                <div class="span12">
+                  <h2>${bookmark.title}</h2>
+                  <a href="${bookmark.url}">
+                    <h4>${bookmark.url}</h4>                
+                  </a>
+                </div>
+              </g:if>
+              <g:else>
 
-                <h2>${bookmark.title}</h2>
-                <a href="${bookmark.url}">
-                  <h4>${bookmark.url}</h4>                
-                </a>
-              </div>
+              </g:else>
             </g:each>
           </div>
         </div>

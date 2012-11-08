@@ -59,7 +59,7 @@
 
             <div class="row-fluid">
               <a href="${request.contextPath}/${following.username}">
-                <h2 style="margin-bottom: 0px"><a class="muted">${following.username}</a></h2>
+                <h2 style="margin-bottom: 0px">${following.username}</h2>
               </a>
             </div>
 
@@ -71,20 +71,20 @@
           <div class="span2">
             <div class="row-fluid">
 
-              <b>${bookmarkInstanceTotal}</b>
-              <a class="muted"> Favoritos</a>
+              <b>${following.bookmarks.size()}</b>
+              <a href="${request.contextPath}/${following.username}" class="muted"> Favoritos</a>
 
             </div>
             <div class="row-fluid">
 
               <b>${following.followings.size()}</b>
-              <a class="muted">Seguindo</a>
+              <a href="${request.contextPath}/user/followings?id=${following.id}" class="muted">Seguindo</a>
 
             </div>
             <div class="row-fluid">
 
               <b>${following.followers.size()}</b>
-              <a class="muted">Seguidores</a>
+              <a href="${request.contextPath}/user/followers?id=${following.id}" class="muted">Seguidores</a>
 
             </div>
             <div class="row-fluid">

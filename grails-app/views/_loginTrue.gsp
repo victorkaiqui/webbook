@@ -1,9 +1,9 @@
-<div class="container-fluid">
+<div class="container-fluid" >
   <div class="row-fluid">
 
     <div class="span3">
 
-      <div class="thumbnail"  style="background: gainsboro">
+      <div class="thumbnail"  style="background-image:URL('https://kippt.com/static/img/base-noise.jpeg?141b58b60994');">
         <title> Webbook · <sec:loggedInUserInfo field="username"/></title>
 
         <div class="row-fluid" style="text-align: center">
@@ -16,18 +16,18 @@
 
         <div class="row-fluid">
           <a href="${request.contextPath}/${user.username}">
-            <div class="thumbnail span4">${bookmarkInstanceTotal} 
+            <div class="thumbnail span4">${user.bookmarks.size()} 
               <div><small>favoritos</small></div>
             </div>
           </a>
 
-          <a href="${request.contextPath}/user/followings">
+          <a href="${request.contextPath}/user/followings?id=${user.id}">
             <div class="thumbnail span4">${user.followings.size()} 
               <div><small>seguindo</small></div>
             </div>
           </a>
 
-          <a href="${request.contextPath}/user/followers">
+          <a href="${request.contextPath}/user/followers?id=${user.id}">
             <div class="thumbnail span4">${user.followers.size()} 
               <div><small>seguidores</small></div>
             </div>
@@ -73,8 +73,8 @@
       </div>
 
       <br>
-      <div class="thumbnail">
-        <ul class="unstyled">
+      <div class="thumbnail"  style="background-image:URL('https://kippt.com/static/img/base-noise.jpeg?141b58b60994');">
+        <ul class="unstyled" >
           <g:each in="${tags}">
             <li> <span class="label label-inverse">#${it}</span></li>
           </g:each>
@@ -82,14 +82,14 @@
       </div>
     </div>
     <!------------------------------------------------------------------------>
-    <div class="thumbnail span8"  style="background-color: whitesmoke;">
+    <div class="thumbnail span8"   style="background-image:URL('https://kippt.com/static/img/base-noise.jpeg?141b58b60994');">
       <h4>Favoritos:</h4>
       <hr> 
 
       <g:each in="${timelineList}" status="i" var="bookmarkInstance">
         <div class="favorito">
 
-        
+
 
           <div class="row-fluid">
 
@@ -103,10 +103,20 @@
                 <font color="black"><h5 style="margin-top: 0; margin-bottom: 0px;">${bookmarkInstance.user.username}</h5></font>
               </a>
 
-              <a href="${request.contextPath}/bookmark/edit?id=${bookmarkInstance?.id}" class="btn btn-link openBookmark" style="margin-bottom: 0px; margin-top: 0px; padding: 0px;">
+              <g:if test="${user.id == bookmarkInstance.user.id}">  
+                <a href="${request.contextPath}/bookmark/edit?id=${bookmarkInstance?.id}" class="btn btn-link openBookmark" style="margin-bottom: 0px; margin-top: 0px; padding: 0px;">
+                  <font color="black">
+                  <h6 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}
+                    <g:if test="${bookmarkInstance.visibility}">
+                      <i class="icon-lock"></i>
+                    </g:if>
+                  </h6>
+                  </font>
+                </a>
+              </g:if>
+              <g:else>
                 <font color="black"><h6 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}</h6></font>
-              </a><br>
-
+              </g:else>
 
               <small><a href="${fieldValue(bean: bookmarkInstance, field: "urlShorten")}">${fieldValue(bean: bookmarkInstance, field: "urlShorten")}</a></small>        
               <p>${fieldValue(bean: bookmarkInstance, field: "description")}</p>
@@ -142,23 +152,25 @@
             </div>
 
             <div class="acoes" style="display: none;">
+              <div class="span2">
+                <g:if test="${user.id == bookmarkInstance.user.id}">  
 
-              <div class="span3">
+                  <i class="icon-trash"></i><a href="${request.contextPath}/bookmark/delete?id=${bookmarkInstance?.id}" class="btn btn-link" onclick="return confirm('Você tem certeza?');">Excluir</a>
+
+                </g:if>
+              </div>
+              <div class="span2">
+                <g:if test="${user.id == bookmarkInstance.user.id}">  
+
+                  <i class="icon-edit"></i><a href="${request.contextPath}/bookmark/edit?id=${bookmarkInstance?.id}" class="btn btn-link openBookmark">Editar</a>
+
+                </g:if>
+              </div>
+              <div class="span2">
                 <g:if test="${user.username != bookmarkInstance.user.username}">
 
                   <i class="icon-ok"></i><a href="${request.contextPath}/bookmark/favoritar?id=${bookmarkInstance?.id}"  onclick="return false;" class="btn btn-link openBookmark">Favoritar</a>
 
-                </g:if>
-              </div>
-
-              <div class="span3">
-                <g:if test="${user.id == bookmarkInstance.user.id}">  
-                  <g:form controller="bookmark">
-
-                    <g:hiddenField name="id" value="${bookmarkInstance?.id}" />
-                    <i class="icon-trash"></i><g:actionSubmit action="delete" value="Excluir" class="btn btn-link"  onclick="return confirm('Você tem certeza?');" />
-
-                  </g:form>
                 </g:if>
               </div>
 

@@ -15,40 +15,43 @@ class UserController {
         def userInstance = springSecurityService.currentUser
         userInstance = User.get(userInstance.id)
         
-        def timelineList = []
+        if(user == null){
+            render (view : "error404")
+        }else{
+            def timelineList = []
           
-        timelineList.addAll(user.bookmarks)
-        timelineList.sort{a , b -> b.dateCreated <=> a.dateCreated}        
+            timelineList.addAll(user.bookmarks)
+            timelineList.sort{a , b -> b.dateCreated <=> a.dateCreated}        
              
-        def listTags = []
-        user.bookmarks.each{
-            it.tags.each{ tag ->       
-                tag.split(",").each{ i ->        
-                    listTags << i     
-                }              
+            def listTags = []
+            user.bookmarks.each{
+                it.tags.each{ tag ->       
+                    tag.split(",").each{ i ->        
+                        listTags << i     
+                    }              
+                }
             }
-        }
            
-        def tagsList = listTags.groupBy({it})
+            def tagsList = listTags.groupBy({it})
 
-        def isFollowing = userInstance.isFollowing(user)
-        render (view : "profile", model: [user : user , userInstance : userInstance, isFollowing: isFollowing , bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user), tagsList: tagsList, timelineList : timelineList])
-        
+            def isFollowing = userInstance.isFollowing(user)
+            render (view : "profile", model: [user : user , userInstance : userInstance, isFollowing: isFollowing , bookmarkInstanceList: Bookmark.findAllByUser(user),  tagsList: tagsList, timelineList : timelineList])
+        }
     }    
     
-    def followings(){
-        def userInstance = springSecurityService.currentUser
-        def user = springSecurityService.currentUser          
+    def followings(){ 
+      
+        def user = User.get(params.id)          
         def followings = user.followings 
         
         followings = followings.followed
         
-        render(view: "followings", model: [ userInstance : userInstance, user: user, followings : followings, bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user)])
+        render(view: "followings", model: [user: user, followings : followings, bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user)])
     }
 
     def followers() {
         
-        def user = springSecurityService.currentUser          
+        def user = User.get(params.id)          
         def followers = user.followers 
         
         followers = followers.follower

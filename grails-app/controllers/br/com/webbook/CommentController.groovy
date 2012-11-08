@@ -100,18 +100,18 @@ class CommentController {
         def commentInstance = Comment.get(id)
         if (!commentInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'comment.label', default: 'Comment'), id])
-            redirect(action: "list")
+            redirect(uri:"/")
             return
         }
 
         try {
             commentInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'comment.label', default: 'Comment'), id])
-            redirect(action: "list")
+            redirect(uri:"/")
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'comment.label', default: 'Comment'), id])
-            redirect(action: "show", id: id)
+            redirect(uri:"/", id: id)
         }
     }
 }
