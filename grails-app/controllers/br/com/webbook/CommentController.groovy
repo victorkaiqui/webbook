@@ -12,13 +12,13 @@ class CommentController {
 
     def list() {
         
-        def bookmark = Bookmark.get(params.id)
-        
+        def bookmark = Bookmark.get(params.id)       
         def comments = bookmark.comments      
-        
+        def user = springSecurityService.currentUser
+         
         comments.sort{a , b -> b.dateCreated <=> a.dateCreated} 
         
-        render(view: "list", model: [commentInstance: new Comment() , comments: comments, bookmarkId: bookmark.id])
+        render(view: "list", model: [commentInstance: new Comment() , comments: comments, bookmark: bookmark, user:user])
     }
 
     def create() {

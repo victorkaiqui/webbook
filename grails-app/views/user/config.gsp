@@ -9,7 +9,7 @@
 
       <div class="span12">
 
-        <sec:loggedInUserInfo field="username"/>
+        <h3><sec:loggedInUserInfo field="username"/></h3>
 
         <div class="row-fluid">
           <div class="span2">

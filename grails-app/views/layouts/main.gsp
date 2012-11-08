@@ -19,16 +19,15 @@
   <!-- Cabeçalho -->
 
   <header>
-    <div class="navbar navbar-inverse"">
+    <div class="navbar navbar-inverse">
          <div class="navbar-inner">
 
-        <a class="brand" href="${request.contextPath}"><g:message code="my.text.title"/></a>
+        <a class="brand" href="${request.contextPath}">WebBook</a>
 
         <sec:ifLoggedIn>
 
-
           <g:form url="[action:'search', controller:'search']" class="navbar-search pull-center">
-            <input type="text" class="search-query" placeholder="Search" name="query">
+            <input type="text" class="search-query" placeholder="Pesquisa" name="query">
           </g:form>
 
 

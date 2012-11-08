@@ -11,25 +11,45 @@
     <title>Sample title</title>
   </head>
   <body>
-
     <div class="container-fluid">
       <div class="row-fluid">
+
         <div class="span6">
-          <g:each in="${users}" var="user">
-${user.username}<br>
-          </g:each>
+
+          <h2>Usuário</h2>
+          <div class="span12 thumbnail">
+
+            <g:each in="${users}" var="user">
+              <div class="span2">
+                <avatar:gravatar email="${user.email}" alt="${user.username}"  cssClass="img-rounded" size="72" defaultGravatarUrl="mm" />
+              </div>
+              <div class="span10">
+                <a href="${request.contextPath}/${user.username}">
+                  <h2>@${user.username}</h2><br>
+                </a>
+              </div>
+            </g:each>
+
+          </div>
+
         </div>
+
         <div class="span6">
-          <g:each in="${bookmarks}" var="bookmark">
-${bookmark.url}<br>
-          </g:each>
+          <h2>Tags</h2>
+          <div class="span12 thumbnail">
+
+            <g:each in="${bookmarks}" var="bookmark">
+              <div class="span12">
+
+                <h2>${bookmark.title}</h2>
+                <a href="${bookmark.url}">
+                  <h4>${bookmark.url}</h4>                
+                </a>
+              </div>
+            </g:each>
+          </div>
         </div>
       </div>
-    </div>
-
-
-
-
 
 
   </body>

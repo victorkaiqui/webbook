@@ -49,9 +49,9 @@
       <h1>Seguindo</h1>
       <hr>
 
-      <div class="row-fluid thumbnail" style="background: whitesmoke">
+      <g:each in="${followings}" var="following">
+        <div class="row-fluid thumbnail" style="background: whitesmoke">
 
-        <g:each in="${followings}" var="following">
           <div class="span1">
             <avatar:gravatar email="${following.email}"  cssClass="img-circle" size="56" defaultGravatarUrl="mm"/>
           </div>
@@ -99,8 +99,10 @@
               </g:form>
             </div>
           </div>
-        </g:each>
-      </div>
+
+        </div>
+        <br>
+      </g:each>
     </div>
   </body>
 </html>

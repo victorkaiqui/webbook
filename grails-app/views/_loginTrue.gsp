@@ -48,7 +48,7 @@
         </div>
       </div>
 
-      <div id="bookmarkModal" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
+      <div id="bookmarkModal" class="modal hide fade in">  
         <div class="modal-header">  
           <a class="close" data-dismiss="modal">×</a>  
           <h3>Adicione seu novo favorito</h3>  
@@ -61,9 +61,9 @@
 
               <g:render template="/bookmark/form" />
 
-              <div class="modal-footer">                  
-                <g:submitButton name="create" value="${message(code: 'default.button.create.label', default: 'Create')}" class="btn btn-warning btn-large"/>
-                <a href="#" class="btn btn-large" data-dismiss="modal" >Close</a>  
+              <div class="modal-footer">  
+                <a href="#" class="btn btn-small btn-danger" data-dismiss="modal" >Close</a>  
+                <g:submitButton name="create" value="Adicionar Favorito" class="btn btn-small btn-info"/>
               </div>
 
             </fieldset>
@@ -76,7 +76,7 @@
       <div class="thumbnail">
         <ul class="unstyled">
           <g:each in="${tags}">
-            <li> <span class="label">#${it}</span></li>
+            <li> <span class="label label-inverse">#${it}</span></li>
           </g:each>
         </ul>
       </div>
@@ -87,8 +87,9 @@
       <hr> 
 
       <g:each in="${timelineList}" status="i" var="bookmarkInstance">
-
         <div class="favorito">
+
+        
 
           <div class="row-fluid">
 
@@ -102,7 +103,7 @@
                 <font color="black"><h5 style="margin-top: 0; margin-bottom: 0px;">${bookmarkInstance.user.username}</h5></font>
               </a>
 
-              <a href="${request.contextPath}/bookmark/update?id=${bookmarkInstance?.id}"  onclick="return false;" class="btn btn-link openBookmark" style="margin-bottom: 0px; margin-top: 0px; padding: 0px;">
+              <a href="${request.contextPath}/bookmark/edit?id=${bookmarkInstance?.id}" class="btn btn-link openBookmark" style="margin-bottom: 0px; margin-top: 0px; padding: 0px;">
                 <font color="black"><h6 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}</h6></font>
               </a><br>
 
@@ -187,8 +188,8 @@ $(document).ready(function(){
 
   $("#tags").tagsInput({
     'defaultText':'Adicione tags',
-    'height':'100px',
-    'width':'215px',
+    'height':'1px',
+    'width':'265px',
     'placeholderColor' :'#B8B8B8'
   });
 
@@ -211,8 +212,8 @@ $(document).ready(function(){
       $("#title").val(data.title);
       $("#url").val(data.url);
       $("#description").val(data.description);
-      $("#tags").val(data.tags);
-      $("#tags").importTags(data.tags.toString());
+//      $("#tags").val(data.tags);
+//      $("#tags").importTags(data.tags.toString());
 
       $('#bookmarkModal').modal();
     });
@@ -226,7 +227,6 @@ var url = $(this).attr("href");
 $('#commentModal .modal-body').load(url);
 $('#commentModal').modal();
 }
-
 
 $('.openComment').on('click', createComment);
 })

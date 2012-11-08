@@ -26,7 +26,7 @@ class IndexController {
                 }
             }
            
-            def tagsList = listTags.groupBy({it})
+            def tagsList = listTags
             
             render(view:"/index", model: [user : user , bookmarkInstanceTotal: Bookmark.countByUser(user), timelineList: timelineList, tags: tagsList])
         }

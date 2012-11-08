@@ -4,16 +4,15 @@ class SearchController {
     
  
     
-    def search() {
-        
+    def search() {        
         
         def userResult =  User.search().list{            
            
-                wildcard   "username", "*" +  params.query  + "*"
+                keyword  "username", "*" +  params.query  + "*"
             
             should {               
-                wildcard  "name", "*" + params.query + "*"
-                wildcard  "lastName", "*" + params.query  + "*"                   
+//                wildcard  "name", "*" + params.query + "*"
+//                wildcard  "lastName", "*" + params.query  + "*"                   
             }
         }
         
@@ -23,8 +22,8 @@ class SearchController {
                 wildcard   "pesquisa",  "*" +  params.query + "*"
             
             should {
-                wildcard  "title", "*" + params.query + "*"
-                wildcard  "description", "*" + params.query   + "*"             
+//                wildcard  "title", "*" + params.query + "*"
+//                wildcard  "description", "*" + params.query   + "*"             
             }
            
         }

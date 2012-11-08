@@ -13,11 +13,8 @@ class BookmarkController {
               
         def user = springSecurityService.currentUser
         user = User.get(user.id)
-      
         
         [bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user)]
-  
-        
     }
    
 
@@ -32,7 +29,7 @@ class BookmarkController {
         
      
         bookmarkInstance.setUser(user)
-        //        bookmarkInstance.setUrlShorten(bookmarkInstance.getUrl().shorten())
+        bookmarkInstance.setUrlShorten(bookmarkInstance.getUrl().shorten())
      
         bookmarkInstance.pesquisa = params.tags
        
@@ -101,7 +98,7 @@ class BookmarkController {
                 bookmarkInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                     [message(code: 'bookmark.label', default: 'Bookmark')] as Object[],
                           "Another user has updated this Bookmark while you were editing")
-                render(view: "edit", model: [bookmarkInstance: bookmarkInstance])
+                render( uri: "/", model: [bookmarkInstance: bookmarkInstance])
                 return
             }
         }
@@ -109,12 +106,12 @@ class BookmarkController {
         bookmarkInstance.properties = params
 
         if (!bookmarkInstance.save(flush: true)) {
-            render(view: "edit", model: [bookmarkInstance: bookmarkInstance])
+            render(uri: "/", model: [bookmarkInstance: bookmarkInstance])
             return
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), bookmarkInstance.id])
-        redirect(action: "show", id: bookmarkInstance.id)
+        redirect(uri: "/", id: bookmarkInstance.id)
     }
 
     def delete(Long id) {

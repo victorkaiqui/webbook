@@ -163,7 +163,7 @@
               <div class="acoes" style="display: none;">
 
                 <div class="span3">
-                  <g:if test="${user.username == bookmarkInstance.user.username}">
+                  <g:if test="${user.username != bookmarkInstance.user.username}">
 
                     <i class="icon-ok"></i><a href="${request.contextPath}/bookmark/favoritar?id=${bookmarkInstance?.id}"  onclick="return false;" class="btn btn-link openBookmark">Favoritar</a>
 

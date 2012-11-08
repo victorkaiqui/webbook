@@ -1,45 +1,33 @@
 
 <div class="container-fluid">
   <div class="row-fluid">
-    <div class="span6">
+    <div class="span4">
+${bookmark.title}
+      <a href="${bookmark.urlShorten}">${bookmark.urlShorten}</a>
+    </div>
+    <div class="span8">
       <g:form url="[action:'save', controller:'comment']">
         <fieldset>
 
           <g:render template="/comment/form"/>
 
-          <g:hiddenField name="id" value="${bookmarkId}" />
-          <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+          <g:hiddenField name="id" value="${bookmark.id}" />
+          <g:submitButton name="create" class="btn btn-primary" value="Comentar" />
 
 
         </fieldset>
       </g:form>
     </div>
+  </div>
+  <div class="row-fluid">
     <div class="span6">
       <g:each in="${comments}" var="comment">
-${comment.text}<br>
+        
+${comment.user.username}
+${comment.text}
 
-        <div class="acoes" style="display: none;">
-          <g:form>        
-            <g:hiddenField name="id" value="${comment?.id}" />
-            <g:actionSubmit class="delete" action="delete" value="Excluir" onclick="return confirm('Você tem certeza?'); "/>
-            </fieldset>
-          </g:form>
-        </div>
+        <br>
       </g:each>
     </div>
   </div>
 </div>
-<script>
-  $(document).ready(function(){
-    $("div.span6").hover(
-    function(){
-      $(this).find("div.acoes").show();
-    },
-    function(){
-$(this).find("div.acoes").hide();
-}
-);
-)}  
-</script>
-
-
