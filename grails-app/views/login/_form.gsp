@@ -10,6 +10,6 @@
 <div>
   <g:field  type='checkbox'  name='checkbox' class="checkbox"/> 
   <small><g:message code="springSecurity.login.remember.me.label"/> - </small>
-  <small><a href="">Esqueceu a Senha?</a></small>
+  <small><a href="${request.contextPath}/user/password">Esqueceu a Senha?</a></small>
 </div>
 

@@ -6,18 +6,39 @@ class UserController {
     
     def springSecurityService
     def userService
+    def mailService
     
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
    
+      
+    def password(){
+        
+        render view:"password"
+        
+    }
+    
+    def changePassword(){
+        
+        def user = User.findByEmail(params.email)
+        
+        user.password =  "123456"
+        user.save()
+        
+        mailService.send("Nova senha Webbok", "Nova senha 123456" ,user.email )
+        
+        redirect uri:"/"
+    }
     def profile(){
         
         def user = User.findByUsername(params.username)
         def userInstance = springSecurityService.currentUser
-        userInstance = User.get(userInstance.id)
+        
         
         if(user == null){
             render (view : "error404")
         }else{
+            userInstance = User.get(userInstance.id)
+            
             def timelineList = []
           
             timelineList.addAll(user.bookmarks)
