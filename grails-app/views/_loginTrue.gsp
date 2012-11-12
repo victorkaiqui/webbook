@@ -109,15 +109,16 @@
                   <h6 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}
                     <g:if test="${bookmarkInstance.visibility}">
                       <i class="icon-lock"></i>
+                       
                     </g:if>
                   </h6>
                   </font>
                 </a>
               </g:if>
-              <g:else>
+              <g:else><br>
                 <font color="black"><h6 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}</h6></font>
               </g:else>
-
+              <h1></h1>
               <small><a href="${fieldValue(bean: bookmarkInstance, field: "urlShorten")}">${fieldValue(bean: bookmarkInstance, field: "urlShorten")}</a></small>        
               <p>${fieldValue(bean: bookmarkInstance, field: "description")}</p>
 
@@ -154,9 +155,12 @@
             <div class="acoes" style="display: none;">
               <div class="span2">
                 <g:if test="${user.id == bookmarkInstance.user.id}">  
+                  <g:form controller="bookmark">
 
-                  <i class="icon-trash"></i><a href="${request.contextPath}/bookmark/delete?id=${bookmarkInstance?.id}" class="btn btn-link" onclick="return confirm('Você tem certeza?');">Excluir</a>
+                    <g:hiddenField name="id" value="${bookmarkInstance?.id}" />
+                    <i class="icon-trash"></i><g:actionSubmit action="delete" value="Excluir" class="btn btn-link"  onclick="return confirm('Você tem certeza?');" />
 
+                  </g:form>
                 </g:if>
               </div>
               <div class="span2">

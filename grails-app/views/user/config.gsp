@@ -77,8 +77,8 @@
                 <div class="row-fluid">                
                   <div class="span8 offset1">
 
-                    <h3><g:message code="my.text.form.edit.conta" /></h3>           
-                    <h5><p class="muted"><g:message code="my.text.form.edit.conta.conteudo" /> </p></h5>   
+                    <h3>Perfil</h3>           
+                    <h5><p class="muted">Altere a configuração do seu perfil</p></h5>   
                     <hr>
 
                     <div class="row-fluid">  
@@ -124,8 +124,8 @@
                 <div class="row-fluid">                
                   <div class="span8 offset1">
 
-                    <h3><g:message code="my.text.form.edit.conta" /></h3>           
-                    <h5><p class="muted"><g:message code="my.text.form.edit.conta.conteudo" /> </p></h5>   
+                    <h3>Senha</h3>           
+                    <h5><p class="muted">Altere sua senha</p></h5>   
                     <hr>
 
                     <div class="row-fluid">  

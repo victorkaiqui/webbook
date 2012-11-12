@@ -1,8 +1,8 @@
 dataSource {
     pooled = true
     driverClassName = "org.apache.derby.jdbc.ClientDriver"
-    username = "admin"
-    password = "admin"
+    username = "sa"
+    password = "sa"
 }
 hibernate {
     cache.use_second_level_cache = true

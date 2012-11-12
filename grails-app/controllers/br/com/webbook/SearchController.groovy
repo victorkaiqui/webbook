@@ -8,23 +8,24 @@ class SearchController {
         
         def userResult =  User.search().list{            
            
-                keyword  "username", "*" +  params.query  + "*"
-            
-            should {               
-//                wildcard  "name", "*" + params.query + "*"
-//                wildcard  "lastName", "*" + params.query  + "*"                   
-            }
+            wildcard  "username", "*" +  params.query  + "*"
+          
         }
-        
+        userResult = userResult +  User.search().list{
+            wildcard  "name", "*" + params.query + "*"
+            wildcard  "lastName", "*" + params.query  + "*"                   
+            
+        }
         def bookmarkResult =  Bookmark.search().list{
            
-            
-                wildcard   "pesquisa",  "*" +  params.query + "*"
-            
-            should {
-//                wildcard  "title", "*" + params.query + "*"
-//                wildcard  "description", "*" + params.query   + "*"             
-            }
+            keyword   "pesquisa",  "*" +  params.query + "*"
+         
+        }
+        
+        bookmarkResult = bookmarkResult +  Bookmark.search().list{
+            wildcard   "pesquisa",  "*" +  params.query + "*"
+            wildcard  "title", "*" + params.query + "*"
+            wildcard  "description", "*" + params.query   + "*"          
            
         }
         

@@ -29,7 +29,7 @@ class BookmarkController {
         
      
         bookmarkInstance.setUser(user)
-//        bookmarkInstance.setUrlShorten(bookmarkInstance.getUrl().shorten())
+        bookmarkInstance.setUrlShorten(bookmarkInstance.getUrl().shorten())
      
         bookmarkInstance.pesquisa = params.tags
        
@@ -114,8 +114,8 @@ class BookmarkController {
         redirect(uri: "/", id: bookmarkInstance.id)
     }
 
-    def delete() {
-        Long id = params.id
+    def delete(Long id) {
+       
         def bookmarkInstance = Bookmark.get(id)
         if (!bookmarkInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), id])

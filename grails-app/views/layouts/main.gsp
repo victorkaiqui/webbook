@@ -60,21 +60,21 @@
   <!--Rodapé-->
   <footer>
     <ul class="nav nav-pills"><br><br>
-      <li><a href="footer/sobre"><g:message code="my.text.footer.sobre"/></a></li>
+      <li><a href="user/error404"><g:message code="my.text.footer.sobre"/></a></li>
 
-      <li><a href="footer/ferramentas"><g:message code="my.text.footer.ferramentas"/></a></li>
+      <li><a href="user/error404"><g:message code="my.text.footer.ferramentas"/></a></li>
 
-      <li><a href="footer/blog"><g:message code="my.text.footer.blog"/></a></li>
+      <li><a href="user/error404"><g:message code="my.text.footer.blog"/></a></li>
 
-      <li><a href="footer/ajuda"><g:message code="my.text.footer.ajuda"/></a></li>
+      <li><a href="user/error404"><g:message code="my.text.footer.ajuda"/></a></li>
 
-      <li><a href="footer/desenvolvedores"><g:message code="my.text.footer.desenvolvedores"/></a></li>
+      <li><a href="user/error404"><g:message code="my.text.footer.desenvolvedores"/></a></li>
 
-      <li><a href="footer/feeds"><g:message code="my.text.footer.feeds"/></a></li>
+      <li><a href="user/error404"><g:message code="my.text.footer.feeds"/></a></li>
 
-      <li><a href="footer/termosdeuso"><g:message code="my.text.footer.termosDeUso"/></a></li>
+      <li><a href="user/error404"><g:message code="my.text.footer.termosDeUso"/></a></li>
 
-      <li><a href="footer/politicadeprivacidade"><g:message code="my.text.footer.politicaDePrivacidade"/></a></li>
+      <li><a href="user/error404"><g:message code="my.text.footer.politicaDePrivacidade"/></a></li>
 
     </ul>
   </footer>

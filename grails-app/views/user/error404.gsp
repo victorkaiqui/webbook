@@ -13,7 +13,7 @@
   <body>
     <div class="hero-unit" style="background-color: transparent; border: none; padding: 0; margin: 0">
       <div class="pull-left span5" style="text-align: center">
-        <p class="sub">Ooops... this is a</p>
+        <p class="sub">Ooops... Não tem nada aqui!</p>
         <h1 style="font-size: 10em;">404</a></h1>
       </div>
       <div class="pull-right span10">
