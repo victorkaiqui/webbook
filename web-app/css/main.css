@@ -19,4 +19,6 @@ footer{
   -ms-interpolation-mode: bicubic;
 }
 
-
+.background-img{
+    background-image:URL('https://kippt.com/static/img/base-noise.jpeg?141b58b60994');
+}

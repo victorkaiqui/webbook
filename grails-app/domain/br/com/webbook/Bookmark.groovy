@@ -1,7 +1,6 @@
 package br.com.webbook
-import org.grails.taggable.*
 
-class Bookmark implements Taggable {
+class Bookmark {
    
     transient springSecurityService
     
@@ -12,17 +11,17 @@ class Bookmark implements Taggable {
     String url
     String encodeUrl
     String urlShorten
-    String description
-    String pesquisa
+    String description    
+    Long idOwner
     static belongsTo = [user : User]
     boolean visibility
 
     static search = {
         title index: 'tokenized'
         description  index: 'tokenized'
-        pesquisa  index: 'tokenized'
-        
+        pesquisa  tags: 'tokenized'        
     }
+    
     static constraints = {
         url url: true 
         urlShorten nullable : true
@@ -30,9 +29,10 @@ class Bookmark implements Taggable {
         title nullable : true        
         description nullable : true        
         visibility nullable : true
+        idOwner nullable : true
     }
     
-    static hasMany = [comments : Comment]  
+    static hasMany = [comments : Comment, tags : Tag]  
     
     def beforeInsert() {
         

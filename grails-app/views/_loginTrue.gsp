@@ -3,7 +3,7 @@
 
     <div class="span3">
 
-      <div class="thumbnail"  style="background-image:URL('https://kippt.com/static/img/base-noise.jpeg?141b58b60994');">
+      <div class="thumbnail background-img">
         <title> Webbook · <sec:loggedInUserInfo field="username"/></title>
 
         <div class="row-fluid" style="text-align: center">
@@ -73,16 +73,18 @@
       </div>
 
       <br>
-      <div class="thumbnail"  style="background-image:URL('https://kippt.com/static/img/base-noise.jpeg?141b58b60994');">
+      <div class="thumbnail background-img">
         <ul class="unstyled" >
           <g:each in="${tags}">
-            <li> <span class="label label-inverse">#${it}</span></li>
+            <li> <span class="label label-inverse">#${it.text}</span></li>
           </g:each>
         </ul>
       </div>
     </div>
+
     <!------------------------------------------------------------------------>
-    <div class="thumbnail span8"   style="background-image:URL('https://kippt.com/static/img/base-noise.jpeg?141b58b60994');">
+
+    <div class="thumbnail span8 background-img">
       <h4>Favoritos:</h4>
       <hr> 
 
@@ -109,7 +111,7 @@
                   <h6 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}
                     <g:if test="${bookmarkInstance.visibility}">
                       <i class="icon-lock"></i>
-                       
+
                     </g:if>
                   </h6>
                   </font>
@@ -119,12 +121,18 @@
                 <font color="black"><h6 style="margin-bottom: 0">${fieldValue(bean: bookmarkInstance, field: "title")}</h6></font>
               </g:else>
               <h1></h1>
-              <small><a href="${fieldValue(bean: bookmarkInstance, field: "urlShorten")}">${fieldValue(bean: bookmarkInstance, field: "urlShorten")}</a></small>        
-              <p>${fieldValue(bean: bookmarkInstance, field: "description")}</p>
 
+              <g:if test="${bookmarkInstance.urlShorten}">
+                <small><a href="${fieldValue(bean: bookmarkInstance, field: "urlShorten")}">${fieldValue(bean: bookmarkInstance, field: "urlShorten")}</a></small>        
+              </g:if>
+              <g:else>
+                <small><a href="${bookmarkInstance.url}">${bookmarkInstance.url}</a></small> 
+              </g:else>
+
+              <p>${fieldValue(bean: bookmarkInstance, field: "description")}</p>
               <div class="row-fluid">
                 <g:each in="${bookmarkInstance.tags}">
-                  <span class="label label-info">#${it}</span>
+                  <span class="label label-info">#${it.text}</span>
                 </g:each>
               </div>
 

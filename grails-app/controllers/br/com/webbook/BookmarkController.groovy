@@ -24,22 +24,30 @@ class BookmarkController {
 
     def save() {
         
-        def bookmarkInstance = new Bookmark(params)
-        def user = springSecurityService.currentUser
+        def bookmarkInstance = new Bookmark()  
         
+        def user = springSecurityService.currentUser      
      
-        bookmarkInstance.setUser(user)
-        bookmarkInstance.setUrlShorten(bookmarkInstance.getUrl().shorten())
+        bookmarkInstance.user = user
+        bookmarkInstance.url = params.url
+        bookmarkInstance.description = params.description                  
+        //        bookmarkInstance.urlShorten = params.url.shorten()
      
-        bookmarkInstance.pesquisa = params.tags
-       
+        def tags = params.tags.split(",")            
+        
         if (!bookmarkInstance.save(flush: true)) {
            
             render(view: "create", model: [bookmarkInstance: bookmarkInstance])
             return
+        }        
+            
+        tags.each{
+            def tag = new Tag()
+            tag.text = it
+            tag.setBookmark(bookmarkInstance)
+            tag.save()
         }
         
-        bookmarkInstance.parseTags(params.tags)
         
         flash.message = message(code: 'default.created.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), bookmarkInstance.id])
         redirect(uri:"/", id: bookmarkInstance.id)
@@ -48,13 +56,13 @@ class BookmarkController {
     def favoritar(){
         
         def bookmark = new Bookmark() 
-        def bookmarkTeste = Bookmark.get(params.id)
+        def bookmarkOwner = Bookmark.get(params.id)
         def user = springSecurityService.currentUser       
    
-        bookmark.title = bookmarkTeste.title
-        bookmark.url =  bookmarkTeste.url
-        bookmark.description =  bookmarkTeste.description    
-        
+        bookmark.title = bookmarkOwner.title
+        bookmark.url =  bookmarkOwner.url
+        bookmark.description =  bookmarkOwner.description    
+        bookmark.idOwner = bookmarkOwner.id
         
         render bookmark as JSON
     }

@@ -18,13 +18,9 @@ class IndexController {
             timelineList.sort{a , b -> b.dateCreated <=> a.dateCreated}        
              
             def listTags = []
-            user.bookmarks.each{
-                it.tags.each{ tag ->       
-                    tag.split(",").each{ i ->        
-                        listTags << i     
-                    }              
-                }
-            }
+//            bookmarks.tags.each{
+//               println it
+//            }
            
             def tagsList = listTags
             
