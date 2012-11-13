@@ -29,20 +29,27 @@
         <div class="span2">
           <div class="row-fluid">
 
-            <b>${bookmarkInstanceTotal}</b>
-            <a class="muted"> Favoritos</a>
+            <b>${user.bookmarks.size()}</b>
+            <a href="${request.contextPath}/${user.username}"> 
+              Favoritos
+            </a>
 
           </div>
           <div class="row-fluid">
 
             <b>${user.followings.size()}</b>
-            <a href="${request.contextPath}/user/followings?id=${user.id}" class="muted">Seguindo</a>
+            <g:link action="followings"  controller="user" id="${user.id}">  
+              Seguindo
+            </g:link>
+
 
           </div>
           <div class="row-fluid">
 
             <b>${user.followers.size()}</b>
-            <a href="${request.contextPath}/user/followers?id=${user.id}"  class="muted">Seguidores</a>
+            <g:link action="followers"  controller="user" id="${user.id}">  
+              Seguidores
+            </g:link>
 
           </div>
           <div class="row-fluid">
@@ -123,7 +130,7 @@
 
                   <div class="row-fluid">
                     <g:each in="${bookmarkInstance.tags}">
-                      <span class="label label-info">#${it}</span>
+                      <span class="label label-info">#${it.text}</span>
                     </g:each>
                   </div>
 
@@ -152,21 +159,21 @@
 
                 <div class="acoes" style="display: none;">
                   <div class="span2">
-                    <g:if test="${user.id != bookmarkInstance.user.id}">  
+                    <g:if test="${user.id == bookmarkInstance.user.id}">  
 
                       <i class="icon-trash"></i><a href="${request.contextPath}/bookmark/delete?id=${bookmarkInstance?.id}" class="btn btn-link" onclick="return confirm('Você tem certeza?');">Excluir</a>
 
                     </g:if>
                   </div>
                   <div class="span2">
-                    <g:if test="${user.id != bookmarkInstance.user.id}">  
+                    <g:if test="${user.id == bookmarkInstance.user.id}">  
 
                       <i class="icon-edit"></i><a href="${request.contextPath}/bookmark/edit?id=${bookmarkInstance?.id}" class="btn btn-link openBookmark">Editar</a>
 
                     </g:if>
                   </div>
                   <div class="span2">
-                    <g:if test="${user.username == bookmarkInstance.user.username}">
+                    <g:if test="${user.username != bookmarkInstance.user.username}">
 
                       <i class="icon-ok"></i><a href="${request.contextPath}/bookmark/favoritar?id=${bookmarkInstance?.id}"  onclick="return false;" class="btn btn-link openBookmark">Favoritar</a>
 

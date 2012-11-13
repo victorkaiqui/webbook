@@ -2,10 +2,6 @@ package br.com.webbook
 import org.ccil.cowan.tagsoup.*
 
 class BookmarkService {
-
-    def serviceMethod() {
-
-    }
     
     def webScrap(String address){
        

@@ -2,11 +2,6 @@ package br.com.webbook
 
 class UserService {
 
-    def serviceMethod() {
-
-    }
-  
-    
     def follow(User userFollower, User userFollowed){
         
         if(userFollower != userFollowed ){

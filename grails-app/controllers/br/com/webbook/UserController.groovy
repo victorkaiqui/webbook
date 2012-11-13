@@ -45,13 +45,13 @@ class UserController {
             timelineList.sort{a , b -> b.dateCreated <=> a.dateCreated}        
              
             def listTags = []
-            user.bookmarks.each{
-                it.tags.each{ tag ->       
-                    tag.split(",").each{ i ->        
-                        listTags << i     
-                    }              
-                }
-            }
+//            user.bookmarks.each{
+//                it.tags.each{ tag ->       
+//                    tag.split(",").each{ i ->        
+//                        listTags << i     
+//                    }              
+//                }
+//            }
            
             def tagsList = listTags.groupBy({it})
 
@@ -60,9 +60,9 @@ class UserController {
         }
     }    
     
-    def followings(){ 
+    def followings() { 
       
-        def user = User.get(params.id)          
+        def user = User.get(params.id)      
         def followings = user.followings 
         
         followings = followings.followed

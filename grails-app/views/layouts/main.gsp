@@ -20,7 +20,7 @@
 
   <header>
     <div class="navbar navbar-inverse">
-         <div class="navbar-inner">
+      <div class="navbar-inner">
 
         <a class="brand" href="${request.contextPath}">WebBook</a>
 
@@ -59,24 +59,26 @@
 
   <!--Rodapé-->
   <footer>
-    <ul class="nav nav-pills"><br><br>
-      <li><a href="user/error404"><g:message code="my.text.footer.sobre"/></a></li>
+<!--    <div id="footer">
+      <ul class="nav nav-pills"><br><br>
+        <li><a href="user/error404"><g:message code="my.text.footer.sobre"/></a></li>
 
-      <li><a href="user/error404"><g:message code="my.text.footer.ferramentas"/></a></li>
+        <li><a href="user/error404"><g:message code="my.text.footer.ferramentas"/></a></li>
 
-      <li><a href="user/error404"><g:message code="my.text.footer.blog"/></a></li>
+        <li><a href="user/error404"><g:message code="my.text.footer.blog"/></a></li>
 
-      <li><a href="user/error404"><g:message code="my.text.footer.ajuda"/></a></li>
+        <li><a href="user/error404"><g:message code="my.text.footer.ajuda"/></a></li>
 
-      <li><a href="user/error404"><g:message code="my.text.footer.desenvolvedores"/></a></li>
+        <li><a href="user/error404"><g:message code="my.text.footer.desenvolvedores"/></a></li>
 
-      <li><a href="user/error404"><g:message code="my.text.footer.feeds"/></a></li>
+        <li><a href="user/error404"><g:message code="my.text.footer.feeds"/></a></li>
 
-      <li><a href="user/error404"><g:message code="my.text.footer.termosDeUso"/></a></li>
+        <li><a href="user/error404"><g:message code="my.text.footer.termosDeUso"/></a></li>
 
-      <li><a href="user/error404"><g:message code="my.text.footer.politicaDePrivacidade"/></a></li>
+        <li><a href="user/error404"><g:message code="my.text.footer.politicaDePrivacidade"/></a></li>
 
-    </ul>
+      </ul>
+    </div>-->
   </footer>
 
 </body>

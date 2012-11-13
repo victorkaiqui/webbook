@@ -6,6 +6,7 @@
       <div class="thumbnail background-img">
         <title> Webbook · <sec:loggedInUserInfo field="username"/></title>
 
+
         <div class="row-fluid" style="text-align: center">
           <a href="${request.contextPath}/${user.username}">
             <avatar:gravatar email="${user.email}" alt="${user.username}"  cssClass="img-circle" size="52" defaultGravatarUrl="mm" />
@@ -21,17 +22,17 @@
             </div>
           </a>
 
-          <a href="${request.contextPath}/user/followings?id=${user.id}">
+          <g:link action="followings"  controller="user" id="${user.id}">            
             <div class="thumbnail span4">${user.followings.size()} 
               <div><small>seguindo</small></div>
-            </div>
-          </a>
+            </div>            
+          </g:link>
 
-          <a href="${request.contextPath}/user/followers?id=${user.id}">
+          <g:link action="followers"  controller="user" id="${user.id}"> 
             <div class="thumbnail span4">${user.followers.size()} 
               <div><small>seguidores</small></div>
             </div>
-          </a>
+          </g:link>
         </div>
 
         <hr>
@@ -48,29 +49,6 @@
         </div>
       </div>
 
-      <div id="bookmarkModal" class="modal hide fade in">  
-        <div class="modal-header">  
-          <a class="close" data-dismiss="modal">×</a>  
-          <h3>Adicione seu novo favorito</h3>  
-        </div>  
-
-        <div class="modal-body">  
-
-          <g:form url="[action:'save', controller:'bookmark']">
-            <fieldset>
-
-              <g:render template="/bookmark/form" />
-
-              <div class="modal-footer">  
-                <a href="#" class="btn btn-small btn-danger" data-dismiss="modal" >Close</a>  
-                <g:submitButton name="create" value="Adicionar Favorito" class="btn btn-small btn-info"/>
-              </div>
-
-            </fieldset>
-          </g:form>
-
-        </div>  
-      </div>
 
       <br>
       <div class="thumbnail background-img">
@@ -82,12 +60,13 @@
       </div>
     </div>
 
-    <!------------------------------------------------------------------------>
+
+    <!------------------------------------------------------------------------> 
+
 
     <div class="thumbnail span8 background-img">
       <h4>Favoritos:</h4>
       <hr> 
-
       <g:each in="${timelineList}" status="i" var="bookmarkInstance">
         <div class="favorito">
 
@@ -142,20 +121,6 @@
           <div class="row-fluid">
             <div class="span6">              
 
-              <div id="commentModal" class="modal hide fade in">  
-                <div class="modal-header">  
-                  <a class="close" data-dismiss="modal">×</a>  
-                  <h3>Adicione seu novo comentario</h3>  
-                </div>  
-
-                <div class="modal-body"> 
-
-                </div> 
-                <div class="modal-footer">
-
-                </div>
-              </div>
-
               <i class="icon-edit"></i><a href="${request.contextPath}/comment/list?id=${bookmarkInstance?.id}" onclick="return false;" data-toggle="modal" class="btn btn-link openComment">Comentários</a>
 
             </div>
@@ -163,25 +128,25 @@
             <div class="acoes" style="display: none;">
               <div class="span2">
                 <g:if test="${user.id == bookmarkInstance.user.id}">  
-                  <g:form controller="bookmark">
 
+                  <g:form controller="bookmark">
                     <g:hiddenField name="id" value="${bookmarkInstance?.id}" />
                     <i class="icon-trash"></i><g:actionSubmit action="delete" value="Excluir" class="btn btn-link"  onclick="return confirm('Você tem certeza?');" />
-
                   </g:form>
+
                 </g:if>
               </div>
               <div class="span2">
                 <g:if test="${user.id == bookmarkInstance.user.id}">  
 
-                  <i class="icon-edit"></i><a href="${request.contextPath}/bookmark/edit?id=${bookmarkInstance?.id}" class="btn btn-link openBookmark">Editar</a>
+                  <i class="icon-edit"></i><a href="${request.contextPath}/bookmark/list?id=${bookmarkInstance?.id}" onclick="return false;" class="btn btn-link openBookmarkEditar">Editar</a>
 
                 </g:if>
               </div>
               <div class="span2">
                 <g:if test="${user.username != bookmarkInstance.user.username}">
 
-                  <i class="icon-ok"></i><a href="${request.contextPath}/bookmark/favoritar?id=${bookmarkInstance?.id}"  onclick="return false;" class="btn btn-link openBookmark">Favoritar</a>
+                  <i class="icon-ok"></i><a href="${request.contextPath}/bookmark/favoritar?id=${bookmarkInstance?.id}"  onclick="return false;" class="btn btn-link openBookmarkFavoritar">Favoritar</a>
 
                 </g:if>
               </div>
@@ -198,6 +163,63 @@
 </div>
 
 
+<!------------------------------------------------------------------------>
+<!------------------------Modal novo Bookmark----------------------------->
+
+<div id="bookmarkModal" class="modal hide fade in">  
+  <div class="modal-header">  
+    <a class="close" data-dismiss="modal">×</a>  
+    <h3>Adicione seu novo favorito</h3>  
+  </div>  
+
+  <div class="modal-body">  
+
+    <g:form url="[action:'save', controller:'bookmark']">
+      <fieldset>
+
+        <g:render template="/bookmark/form" />
+
+        <div class="modal-footer">  
+          <a href="#" class="btn btn-small btn-danger" data-dismiss="modal" >Close</a>  
+          <g:submitButton name="create" value="Adicionar Favorito" class="btn btn-small btn-info"/>
+        </div>
+
+      </fieldset>
+    </g:form>
+
+  </div>  
+</div>
+<!------------------------------------------------------------------------> 
+<!------------------------Modal edit Bookmark----------------------------->
+
+<div id="bookmarkModalEditar" class="modal hide fade in">  
+  <div class="modal-header">  
+    <a class="close" data-dismiss="modal">×</a>  
+    <h4>Altere seu favorito</h4>  
+  </div>  
+
+  <div class="modal-body form-horizontal">  
+
+  </div>  
+</div>
+<!------------------------------------------------------------------------> 
+<!------------------------Modal novo Comment------------------------------>
+
+
+<div id="commentModal" class="modal hide fade in">  
+  <div class="modal-header">  
+    <a class="close" data-dismiss="modal">×</a>  
+    <h3>Adicione seu novo comentario</h3>  
+  </div>  
+
+  <div class="modal-body"> 
+
+  </div> 
+  <div class="modal-footer">
+
+  </div>
+</div>
+<!------------------------------------------------------------------------>
 
 <script>
 $(document).ready(function(){
@@ -212,11 +234,12 @@ $(document).ready(function(){
 
   $("#tags").tagsInput({
     'defaultText':'Adicione tags',
-    'height':'1px',
-    'width':'265px',
+    'height':'auto',
+    'width':'auto',
     'placeholderColor' :'#B8B8B8'
   });
 
+/*-----------------Bookmark Criar-----------------*/
   $('#openBookmarkModal').click(function() {
     var url =  $("#bookmarkUrl").val();
 
@@ -228,8 +251,9 @@ $(document).ready(function(){
     $('#bookmarkModal').modal();
 
   });
-  
-  function loadData(){
+ 
+/*-----------------Bookmark Favoritar-----------------*/ 
+  function loadDataFavoritar(){
     var url = $(this).attr("href");
     $.get(url, {}, function (data){
       $("#id").val(data.id);
@@ -239,19 +263,42 @@ $(document).ready(function(){
 //      $("#tags").val(data.tags);
 //      $("#tags").importTags(data.tags.toString());
 
-      $('#bookmarkModal').modal();
-    });
+      $('#bookmarkModalFavoritar').modal();
+      });
   }
 
-  $('.openBookmark').on('click', loadData);
+  $('.openBookmarkFavoritar').on('click', loadDataFavoritar);
 
+/*-----------------Bookmark Editar-----------------*/
+  function loadDataEditar(){
+    var url = $(this).attr("href"); 
+    
+   $('#bookmarkModalEditar .modal-body').load(url);
+   $('#bookmarkModalEditar').modal();      
+  }
+
+  $('.openBookmarkEditar').on('click', loadDataEditar);
+  
+/*-----------------Comment Criar-----------------*/  
   function createComment() {
-var url = $(this).attr("href");
+    var url = $(this).attr("href");
 
-$('#commentModal .modal-body').load(url);
-$('#commentModal').modal();
-}
+    $('#commentModal .modal-body').load(url);
+    $('#commentModal').modal();
+  }
 
-$('.openComment').on('click', createComment);
+  $('.openComment').on('click', createComment);
+
+/*-----------------Scroll Down-----------------*/
+  $(window).scroll(function(){
+    if  ($(window).scrollTop() == $(document).height() - $(window).height()){
+     loadNewData();
+   }
+ });
+
+  function loadNewData(){
+    
+  }
+
 })
 </script>

@@ -24,7 +24,7 @@ class IndexController {
            
             def tagsList = listTags
             
-            render(view:"/index", model: [user : user , bookmarkInstanceTotal: Bookmark.countByUser(user), timelineList: timelineList, tags: tagsList])
+            render(view:"/index", model: [user : user , bookmarkTotal: Bookmark.countByUser(user), timelineList: timelineList, tags: tagsList])
         }
         else {
             render(view:"/index" )

@@ -8,16 +8,14 @@ class BookmarkController {
     def bookmarkService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    
-    def list(){
-              
-        def user = springSecurityService.currentUser
-        user = User.get(user.id)
+    def list() {
         
-        [bookmarkInstanceList: Bookmark.findAllByUser(user), bookmarkInstanceTotal: Bookmark.countByUser(user)]
+        def bookmark = Bookmark.get(params.id)
+        def user = springSecurityService.currentUser         
+        
+        render(view: "list", model: [bookmark: bookmark, user:user])
     }
-   
-
+    
     def create() {
         [bookmarkInstance: new Bookmark(params)]
     }
@@ -29,6 +27,7 @@ class BookmarkController {
         def user = springSecurityService.currentUser      
      
         bookmarkInstance.user = user
+        bookmarkInstance.title = params.title
         bookmarkInstance.url = params.url
         bookmarkInstance.description = params.description                  
         //        bookmarkInstance.urlShorten = params.url.shorten()
@@ -71,33 +70,31 @@ class BookmarkController {
         render bookmarkService.webScrap(params.url) as JSON  
     }
     
-    def show(Long id) {
-        def bookmarkInstance = Bookmark.get(id)
-        if (!bookmarkInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), id])
-            redirect(action: "list")
-            return
-        }
-
-        [bookmarkInstance: bookmarkInstance]
+    def show() {
+        def bookmarkInstance = Bookmark.get(params.id)
+  
+        render bookmarkInstance as JSON 
     }
 
     def edit(Long id) {
+        id = params.id
         def bookmarkInstance = Bookmark.get(id)
+        println bookmarkInstance
         if (!bookmarkInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), id])
-            redirect(action: "list")
+            redirect(uri:"/")
             return
         }
-
+        
         [bookmarkInstance: bookmarkInstance]
+             
     }
 
     def update(Long id, Long version) {
         def bookmarkInstance = Bookmark.get(id)
         if (!bookmarkInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), id])
-            redirect(action: "list")
+            redirect(auri:"/")
             return
         }
 
@@ -138,7 +135,7 @@ class BookmarkController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'bookmark.label', default: 'Bookmark'), id])
-            redirect(action: "show", id: id)
+            redirect(uri: "/", id: id)
         }
     }
 }

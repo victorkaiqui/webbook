@@ -6,18 +6,6 @@
         Purpose of the stylesheet follows.
 */
 
-footer{
-    width: 940px;
-    margin-left: auto;
-    margin-right: auto; 
-}
-#teste img {
-  height: auto;
-  max-width: 10%;
-  vertical-align: 10px;
-  border: 0;
-  -ms-interpolation-mode: bicubic;
-}
 
 .background-img{
     background-image:URL('https://kippt.com/static/img/base-noise.jpeg?141b58b60994');

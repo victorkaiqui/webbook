@@ -18,7 +18,7 @@ class SearchController {
         }
         def bookmarkResult =  Bookmark.search().list{
            
-            keyword   "pesquisa",  "*" +  params.query + "*"
+            keyword   "tag",  "*" +  params.query + "*"
          
         }
         
