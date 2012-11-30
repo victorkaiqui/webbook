@@ -13,7 +13,7 @@ class Bookmark {
     String urlShorten
     String description    
     Long idOwner
-    static belongsTo = [user : User]
+    static belongsTo = [user : User, list : List]
     boolean visibility
 
     static search = {

@@ -9,13 +9,15 @@ class User {
     
     String name
     String lastName
+    String description
+    String location
     String email
     String username
     String password   
     Date birthyday
     
     static mappedBy = [followers : 'followed' , followings : 'follower']
-    static hasMany = [bookmarks : Bookmark , comments : Comment , filters : Filter, followers : Friendship , followings : Friendship ]    
+    static hasMany = [bookmarks : Bookmark , comments : Comment , filters : Filter, followers : Friendship , followings : Friendship , list : List]    
     
     boolean enabled = true
     boolean accountExpired = false
@@ -35,6 +37,8 @@ class User {
         email blank: false ,email: true
         password blank: false , password : true      
         birthyday widget : 'datePicker' , nullable : true
+        description blank: false , maxSize: 160  , nullable : true
+        location nullable : true
     }
 
     static mapping = {
